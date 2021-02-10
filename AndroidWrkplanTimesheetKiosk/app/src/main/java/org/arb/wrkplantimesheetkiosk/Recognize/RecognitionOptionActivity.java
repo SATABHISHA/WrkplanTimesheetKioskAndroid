@@ -393,8 +393,8 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 break;
             case R.id.rl_view_leave_balance:
                 loadLeaveBalanceData();
-            case R.id.tv_view_leave_balance:
-                loadLeaveBalanceData();
+            /*case R.id.tv_view_leave_balance:
+                loadLeaveBalanceData();*/
             case R.id.rl_cancel:
                 Intent intent_cancel = new Intent(this, HomeActivity.class);
                 intent_cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

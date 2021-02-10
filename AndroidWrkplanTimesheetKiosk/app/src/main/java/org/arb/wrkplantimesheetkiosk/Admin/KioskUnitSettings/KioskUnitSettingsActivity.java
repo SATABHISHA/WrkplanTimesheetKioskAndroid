@@ -1,6 +1,7 @@
 package org.arb.wrkplantimesheetkiosk.Admin.KioskUnitSettings;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -23,9 +24,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.arb.wrkplantimesheetkiosk.Adapter.EmployeeImageSettingsAdapter;
+import org.arb.wrkplantimesheetkiosk.Admin.AdminHomeActivity;
 import org.arb.wrkplantimesheetkiosk.Admin.EmployeeImageSettings.EmployeeImageSettingsActivity;
 import org.arb.wrkplantimesheetkiosk.Config.Config;
+import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
+import org.arb.wrkplantimesheetkiosk.Recognize.RecognitionOptionActivity;
+import org.arb.wrkplantimesheetkiosk.Recognize.RecognizeHomeActivity;
 import org.json.JSONObject;
 import org.json.XML;
 
@@ -40,14 +45,16 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
     RadioButton rdbtn_faceattndance, rdbtn_view_select, rdbtn_leave_balance;
 
     RadioButton rdbtn_face_attnd_yes, rdbtn_face_attnd_no, rdbtn_view_select_yes, rdbtn_view_select_no, rdbtn_leave_balance_yes, rdbtn_leave_balance_no;
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
 
-    public static String faceattndance_yn = "1", view_select_yn = "1", leave_balance_yn = "1";
+    public static Integer faceattndance_yn = 1, view_select_yn = 1, leave_balance_yn = 1;
+    public static String android_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kiosk_unit_settings);
-        String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
         ed_corp_id = findViewById(R.id.ed_corp_id);
@@ -69,9 +76,11 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
         tv_cancel = findViewById(R.id.tv_cancel);
 
         ed_device_id.setText(android_id);
+        ed_corp_id.setText(userSingletonModel.getCorpID());
 
         tv_done.setOnClickListener(this);
         tv_cancel.setOnClickListener(this);
+        loadData();
     }
 
     @Override
@@ -90,25 +99,25 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
 
     public void validate_radiobtn(){
         if (rdbtn_face_attnd_yes.isChecked()){
-            faceattndance_yn = "1";
+            faceattndance_yn = 1;
         }
         if (rdbtn_face_attnd_no.isChecked()){
-            faceattndance_yn = "0";
+            faceattndance_yn = 0;
         }
 
 
         if (rdbtn_view_select_yes.isChecked()){
-            view_select_yn = "1";
+            view_select_yn = 1;
         }
         if (rdbtn_view_select_no.isChecked()){
-            view_select_yn = "0";
+            view_select_yn = 0;
         }
 
         if (rdbtn_leave_balance_yes.isChecked()){
-            leave_balance_yn = "1";
+            leave_balance_yn = 1;
         }
         if (rdbtn_leave_balance_no.isChecked()){
-            leave_balance_yn = "0";
+            leave_balance_yn = 0;
         }
     }
 
@@ -148,11 +157,13 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
                                     if (jsonObject.getString("status").contentEquals("true")){
 //                                        loadData();
                                         Log.d("result-=>",jsonObject.getString("message"));
+                                        Intent intent = new Intent(KioskUnitSettingsActivity.this, AdminHomeActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
 
                                     }else{
-//                                        loadData();
-                                        finish();
-                                        startActivity(getIntent());
+//
+                                       Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                                         Log.d("result-=>",jsonObject.getString("message"));
                                     }
 
@@ -199,9 +210,9 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
                 params.put("CorpId", "arb-kol-dev");
                 params.put("DeviceId", ed_device_id.getText().toString());
                 params.put("UnitName", ed_kios_unit_name.getText().toString());
-                params.put("AttendanceYn", faceattndance_yn);
-                params.put("TaskListYn", view_select_yn);
-                params.put("LeaveBalanceYn", leave_balance_yn);
+                params.put("AttendanceYn", String.valueOf(faceattndance_yn));
+                params.put("TaskListYn", String.valueOf(view_select_yn));
+                params.put("LeaveBalanceYn", String.valueOf(leave_balance_yn));
                 /*params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
                 params.put("deviceType", "1");
                 params.put("EmpType", "MAIN");*/
@@ -214,4 +225,133 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
         requestQueue.add(stringRequest);
     }
     //---code to save info, ends-----
+
+    //--code to load data starts----
+    public void loadData(){
+        String url = Config.BaseUrl + "KioskService.asmx/GetKioskInfo";
+
+
+        final ProgressDialog loading = ProgressDialog.show(KioskUnitSettingsActivity.this, "Loading", "Please wait while loading data", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject jsonObj = null;
+                        try{
+                            jsonObj = XML.toJSONObject(response);
+                            String responseData = jsonObj.toString();
+                            String val = "";
+                            JSONObject resobj = new JSONObject(responseData);
+                            Iterator<?> keys = resobj.keys();
+                            while(keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                if ( resobj.get(key) instanceof JSONObject ) {
+                                    JSONObject xx = new JSONObject(resobj.get(key).toString());
+                                    val = xx.getString("content");
+                                    Log.d("res1",xx.getString("content"));
+                                    JSONObject jsonObject = new JSONObject(val);
+                                   /* String status = jsonObject.getString("status");
+
+                                    Log.d("statusTest",status);*/
+
+                                    Log.d("timesheetid-=>", String.valueOf(jsonObject.getInt("timesheet_kiosk_id")));
+
+//                                    Log.d("face_attnd-=>", String.valueOf(faceattndance_yn));
+                                    Integer timesheetid = jsonObject.getInt("timesheet_kiosk_id");
+                                    if (jsonObject.getString("timesheet_kiosk_id").contentEquals("0")) {
+
+                                        leave_balance_yn = 1;
+                                        faceattndance_yn = 1;
+                                        view_select_yn = 1;
+
+                                        rdbtn_face_attnd_yes.setChecked(true);
+                                        rdbtn_view_select_yes.setChecked(true);
+                                        rdbtn_leave_balance_yes.setChecked(true);
+
+
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+
+
+                                    } else {
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                        ed_kios_unit_name.setText(jsonObject.getString("unit_name"));
+                                        faceattndance_yn = Integer.parseInt(jsonObj.getString("face_attendance_yn"));
+                                        leave_balance_yn = jsonObj.getInt("view_leave_balance_yn");
+                                        view_select_yn = jsonObj.getInt("task_selection_yn");
+                                        Log.d("face_attnd-=>", String.valueOf(faceattndance_yn));
+                                        if (faceattndance_yn == 0){
+//                                            rdbtn_face_attnd_yes.setChecked(false);
+                                            rdbtn_face_attnd_no.setChecked(true);
+                                        }else if(faceattndance_yn == 1){
+                                            rdbtn_face_attnd_yes.setChecked(true);
+//                                            rdbtn_face_attnd_no.setChecked(false);
+                                        }
+                                        if (leave_balance_yn == 0){
+                                            rdbtn_leave_balance_yes.setChecked(false);
+                                            rdbtn_leave_balance_no.setChecked(true);
+                                        }else{
+                                            rdbtn_leave_balance_yes.setChecked(true);
+                                            rdbtn_leave_balance_no.setChecked(false);
+                                        }
+                                        if (view_select_yn == 0){
+                                            rdbtn_view_select_yes.setChecked(false);
+                                            rdbtn_view_select_no.setChecked(true);
+                                        }else{
+                                            rdbtn_view_select_yes.setChecked(true);
+                                            rdbtn_view_select_no.setChecked(false);
+                                        }
+                                    }
+
+
+                                    loading.dismiss();
+//                                    Toast.makeText(getApplicationContext(),xx.getString("content"),Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            loading.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+
+
+                String message = "Could not connect server";
+               /* int color = Color.parseColor("#ffffff");
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.relativeLayout), message, 4000);
+
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(color);
+                snackbar.show();*/
+
+               /* View v = findViewById(R.id.relativeLayout);
+                new org.arb.gst.config.Snackbar(message,v);
+                Log.d("Volley Error-=>",error.toString());*/
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                Log.d("Volley Error-=>",error.toString());
+
+                loading.dismiss();
+
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("CorpId", "arb-kol-dev");
+                params.put("DeviceId", android_id);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(KioskUnitSettingsActivity.this);
+        requestQueue.add(stringRequest);
+    }
+    //--code to load data ends----
 }

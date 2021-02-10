@@ -246,11 +246,12 @@
                 android:background="@drawable/layout6">
                 <TextView
                     android:id="@+id/tv_view_leave_balance"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="22sp"
                     android:textColor="#4f4f4f"
+                    android:focusableInTouchMode="true"
                     android:text="View Leave Balance"/>
             </RelativeLayout>
             <RelativeLayout

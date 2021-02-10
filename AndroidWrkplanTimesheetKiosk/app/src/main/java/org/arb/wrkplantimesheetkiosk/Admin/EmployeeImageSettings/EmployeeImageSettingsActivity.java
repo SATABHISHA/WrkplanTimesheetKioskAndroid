@@ -72,6 +72,10 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
 
     //---code to load data from api using volley, starts
     public void loadData(){
+
+        if (!employeeImageSettingsModelArrayList.isEmpty()){
+            employeeImageSettingsModelArrayList.clear();
+        }
         String url = Config.BaseUrl + "KioskService.asmx/ListFaces";
 
 
@@ -118,7 +122,8 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
                                     }
 
 //                                recycler_view.setAdapter(new TaskSelectionAdapter(TaskSelectionActivity.this, employeeTimesheetModelArrayList));
-                                    recycler_view.setAdapter(employeeImageSettingsAdapter);
+//                                    recycler_view.setAdapter(employeeImageSettingsAdapter);
+                                    recycler_view.setAdapter(new EmployeeImageSettingsAdapter(EmployeeImageSettingsActivity.this,employeeImageSettingsModelArrayList));
 
 
 
@@ -246,12 +251,12 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
                                     if (jsonObject.getString("Status").contentEquals("true")){
                                         loadData();
                                         Log.d("result-=>",jsonObject.getString("Message"));
-                                        finish();
-                                        startActivity(getIntent());
+                                        /*finish();
+                                        startActivity(getIntent());*/
                                     }else{
                                         loadData();
-                                        finish();
-                                        startActivity(getIntent());
+                                        /*finish();
+                                        startActivity(getIntent());*/
                                         Log.d("result-=>",jsonObject.getString("Message"));
                                     }
 
