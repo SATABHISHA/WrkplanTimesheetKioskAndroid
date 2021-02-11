@@ -23,10 +23,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
                     android:textSize="20sp"
                     android:textStyle="normal"
                     android:textColor="#ffffff"
-                    android:text="Punch Out Alert!"/>
+                    android:text="Enroll Alert!"/>
 
             </RelativeLayout>
             <TextView
@@ -56,7 +58,7 @@
             android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/layout6"
+            android:background="@drawable/layout"
             android:orientation="horizontal">
 
             <LinearLayout
