@@ -52,5 +52,11 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             default:
                 break;
         }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
     }
 }

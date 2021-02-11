@@ -130,36 +130,36 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                     final int position = getAdapterPosition();
 
                     if (employeeImageSettingsModelArrayList.get(position).getAws_action().contentEquals("enroll")) {
-                    LayoutInflater li = LayoutInflater.from(context);
-                    final View dialog = li.inflate(R.layout.dialog_employee_image_alert, null);
-                    final TextView tv_title = dialog.findViewById(R.id.tv_title);
-                    final TextView tv_body = dialog.findViewById(R.id.tv_body);
-                    final LinearLayout ll_yes = dialog.findViewById(R.id.ll_yes);
-                    final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View dialog = li.inflate(R.layout.dialog_employee_image_alert, null);
+                        final TextView tv_title = dialog.findViewById(R.id.tv_title);
+                        final TextView tv_body = dialog.findViewById(R.id.tv_body);
+                        final LinearLayout ll_yes = dialog.findViewById(R.id.ll_yes);
+                        final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
 
 
-                    tv_title.setText("Do you want to Enroll face image for "+employeeImageSettingsModelArrayList.get(position).getName_first()+" "+employeeImageSettingsModelArrayList.get(position).getName_last()+" ?");
+                        tv_title.setText("Do you want to Enroll face image for "+employeeImageSettingsModelArrayList.get(position).getName_first()+" "+employeeImageSettingsModelArrayList.get(position).getName_last()+" ?");
 
-                    String body = "Tips for better Recognition result: \n1) Individual's face must be seen clearly and focused \n2) Individual's face must be at center of the camera's frame \n3) Avoid dark background";
-                    tv_body.setText(body);
+                        String body = "Tips for better Recognition result: \n1) Individual's face must be seen clearly and focused \n2) Individual's face must be at center of the camera's frame \n3) Avoid dark background";
+                        tv_body.setText(body);
 
-                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                    alert.setView(dialog);
-                    alert.setCancelable(false);
-                    //Creating an alert dialog
-                    final AlertDialog alertDialog = alert.create();
-                    alertDialog.show();
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        alert.setView(dialog);
+                        alert.setCancelable(false);
+                        //Creating an alert dialog
+                        final AlertDialog alertDialog = alert.create();
+                        alertDialog.show();
 
-                    ll_no.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            alertDialog.dismiss();
-                        }
-                    });
+                        ll_no.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                alertDialog.dismiss();
+                            }
+                        });
 
-                    ll_yes.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+                        ll_yes.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
 
                                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -173,13 +173,45 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                                 emp_id = employeeImageSettingsModelArrayList.get(position).getId_person();
 //                            Log.d("base64-=>",base64String);
 
-                        }
-                    });
-                }else if(employeeImageSettingsModelArrayList.get(position).getAws_action().contentEquals("delete")){
+                            }
+                        });
+                    }else if(employeeImageSettingsModelArrayList.get(position).getAws_action().contentEquals("delete")){
                         emp_id = employeeImageSettingsModelArrayList.get(position).getId_person();
-                        DeleteImage(position);
-                    Log.d("position-=>",String.valueOf(position));
-                }
+//                        DeleteImage(position);
+                        Log.d("position-=>",String.valueOf(position));
+
+                        //---custom dialog for delete, starts
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View dialog = li.inflate(R.layout.dialog_employee_delete_alert, null);
+
+                        TextView tv_ok = dialog.findViewById(R.id.tv_ok);
+                        TextView tv_cancel = dialog.findViewById(R.id.tv_cancel);
+
+
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        alert.setView(dialog);
+                        alert.setCancelable(false);
+                        //Creating an alert dialog
+                        final AlertDialog alertDialog = alert.create();
+                        alertDialog.show();
+
+                        tv_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                DeleteImage(position);
+                            }
+                        });
+
+                        tv_cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
+                            }
+                        });
+
+
+                        //---custom dialog for delete, ends
+                    }
                 }
             });
 
