@@ -27,6 +27,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.arb.wrkplantimesheetkiosk.Adapter.EmployeeImageSettingsAdapter;
 import org.arb.wrkplantimesheetkiosk.Adapter.TaskSelectionAdapter;
+import org.arb.wrkplantimesheetkiosk.Admin.AdminHomeActivity;
+import org.arb.wrkplantimesheetkiosk.Admin.KioskUnitSettings.KioskUnitSettingsActivity;
 import org.arb.wrkplantimesheetkiosk.Config.Config;
 import org.arb.wrkplantimesheetkiosk.Config.ImageUtil;
 import org.arb.wrkplantimesheetkiosk.Model.EmployeeImageSettingsModel;
@@ -319,6 +321,9 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
+        Intent intent = new Intent(EmployeeImageSettingsActivity.this, AdminHomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

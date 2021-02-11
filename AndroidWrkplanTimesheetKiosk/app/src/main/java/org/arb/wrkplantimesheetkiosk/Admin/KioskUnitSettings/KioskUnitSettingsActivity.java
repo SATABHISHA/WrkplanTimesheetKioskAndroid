@@ -93,9 +93,13 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
                 Log.d("test-=>",faceattndance_yn+"\n"+view_select_yn+"\n"+leave_balance_yn);
                 break;
             case R.id.tv_cancel:
+                Intent intent = new Intent(KioskUnitSettingsActivity.this, AdminHomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
         }
     }
+
 
     public void validate_radiobtn(){
         if (rdbtn_face_attnd_yes.isChecked()){
@@ -123,7 +127,7 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
     }
 
     //---code to save info, starts-----
@@ -256,24 +260,25 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
 
                                     Log.d("timesheetid-=>", String.valueOf(jsonObject.getInt("timesheet_kiosk_id")));
 
-//                                    Log.d("face_attnd-=>", String.valueOf(faceattndance_yn));
+
 //                                    Double timesheetid = jsonObject.getDouble("timesheet_kiosk_id");
 
                                     if (Integer.parseInt(jsonObject.getString("timesheet_kiosk_id")) > 0) {
 
                                         ed_kios_unit_name.setText(jsonObject.getString("unit_name"));
-                                        faceattndance_yn = Integer.parseInt(jsonObj.getString("face_attendance_yn"));
-                                        leave_balance_yn = jsonObj.getInt("view_leave_balance_yn");
-                                        view_select_yn = jsonObj.getInt("task_selection_yn");
+                                        faceattndance_yn = Integer.parseInt(jsonObject.getString("face_attendance_yn"));
+                                        leave_balance_yn = jsonObject.getInt("view_leave_balance_yn");
+                                        view_select_yn = jsonObject.getInt("task_selection_yn");
 //                                        Log.d("face_attnd-=>", String.valueOf(faceattndance_yn));
-                                        Log.d("face_attnd-=>", jsonObject.getString("unit_name"));
+                                        Log.d("kiosk_name-=>", jsonObject.getString("unit_name"));
+                                        Log.d("face_attnd1-=>", String.valueOf(faceattndance_yn));
 
                                         if (faceattndance_yn == 0){
-//                                            rdbtn_face_attnd_yes.setChecked(false);
+                                            rdbtn_face_attnd_yes.setChecked(false);
                                             rdbtn_face_attnd_no.setChecked(true);
                                         }else if(faceattndance_yn == 1){
                                             rdbtn_face_attnd_yes.setChecked(true);
-//                                            rdbtn_face_attnd_no.setChecked(false);
+                                            rdbtn_face_attnd_no.setChecked(false);
                                         }
                                         if (leave_balance_yn == 0){
                                             rdbtn_leave_balance_yes.setChecked(false);
