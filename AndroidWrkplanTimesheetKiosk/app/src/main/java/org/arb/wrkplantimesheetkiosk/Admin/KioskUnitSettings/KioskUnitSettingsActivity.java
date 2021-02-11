@@ -248,7 +248,7 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
                                 if ( resobj.get(key) instanceof JSONObject ) {
                                     JSONObject xx = new JSONObject(resobj.get(key).toString());
                                     val = xx.getString("content");
-                                    Log.d("res1",xx.getString("content"));
+                                    Log.d("resData-=>",xx.getString("content"));
                                     JSONObject jsonObject = new JSONObject(val);
                                    /* String status = jsonObject.getString("status");
 
@@ -257,28 +257,17 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
                                     Log.d("timesheetid-=>", String.valueOf(jsonObject.getInt("timesheet_kiosk_id")));
 
 //                                    Log.d("face_attnd-=>", String.valueOf(faceattndance_yn));
-                                    Integer timesheetid = jsonObject.getInt("timesheet_kiosk_id");
-                                    if (jsonObject.getString("timesheet_kiosk_id").contentEquals("0")) {
+//                                    Double timesheetid = jsonObject.getDouble("timesheet_kiosk_id");
 
-                                        leave_balance_yn = 1;
-                                        faceattndance_yn = 1;
-                                        view_select_yn = 1;
+                                    if (Integer.parseInt(jsonObject.getString("timesheet_kiosk_id")) > 0) {
 
-                                        rdbtn_face_attnd_yes.setChecked(true);
-                                        rdbtn_view_select_yes.setChecked(true);
-                                        rdbtn_leave_balance_yes.setChecked(true);
-
-
-//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-
-
-                                    } else {
-//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                                         ed_kios_unit_name.setText(jsonObject.getString("unit_name"));
                                         faceattndance_yn = Integer.parseInt(jsonObj.getString("face_attendance_yn"));
                                         leave_balance_yn = jsonObj.getInt("view_leave_balance_yn");
                                         view_select_yn = jsonObj.getInt("task_selection_yn");
-                                        Log.d("face_attnd-=>", String.valueOf(faceattndance_yn));
+//                                        Log.d("face_attnd-=>", String.valueOf(faceattndance_yn));
+                                        Log.d("face_attnd-=>", jsonObject.getString("unit_name"));
+
                                         if (faceattndance_yn == 0){
 //                                            rdbtn_face_attnd_yes.setChecked(false);
                                             rdbtn_face_attnd_no.setChecked(true);
@@ -300,6 +289,17 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
                                             rdbtn_view_select_yes.setChecked(true);
                                             rdbtn_view_select_no.setChecked(false);
                                         }
+
+
+
+                                    } else {
+                                        leave_balance_yn = 1;
+                                        faceattndance_yn = 1;
+                                        view_select_yn = 1;
+
+                                        rdbtn_face_attnd_yes.setChecked(true);
+                                        rdbtn_view_select_yes.setChecked(true);
+                                        rdbtn_leave_balance_yes.setChecked(true);
                                     }
 
 
