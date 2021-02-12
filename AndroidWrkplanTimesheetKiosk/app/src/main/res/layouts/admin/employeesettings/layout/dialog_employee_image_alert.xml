@@ -25,7 +25,7 @@
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:textStyle="normal"
                     android:textColor="#ffffff"
                     android:text="Enroll Alert!"/>

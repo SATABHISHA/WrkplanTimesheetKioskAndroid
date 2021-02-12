@@ -46,7 +46,7 @@
             android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/layout6"
+            android:background="@drawable/layout"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -62,12 +62,14 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Yes"
+                    android:textColor="#000000"
                     android:textSize="23sp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="I will Punch Out"
+                    android:textColor="#5B5B5B"
                     android:textSize="13sp"/>
             </LinearLayout>
             <LinearLayout
@@ -91,11 +93,13 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="No"
+                        android:textColor="#000000"
                         android:textSize="23sp"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:textColor="#5B5B5B"
                         android:text="I want to take a break"
                         android:textSize="13sp"/>
                 </LinearLayout>
