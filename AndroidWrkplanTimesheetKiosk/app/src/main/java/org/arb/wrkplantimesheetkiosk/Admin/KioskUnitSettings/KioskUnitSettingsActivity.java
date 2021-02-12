@@ -1,7 +1,9 @@
 package org.arb.wrkplantimesheetkiosk.Admin.KioskUnitSettings;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -49,6 +51,8 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
 
     public static Integer faceattndance_yn = 1, view_select_yn = 1, leave_balance_yn = 1;
     public static String android_id;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -164,6 +168,19 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
                                         Intent intent = new Intent(KioskUnitSettingsActivity.this, AdminHomeActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
+
+                                        //====================setting shared preference variables, code starts==============
+
+                                        sharedPreferences = getApplication().getSharedPreferences("KioskDetails", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("UnitName", ed_kios_unit_name.getText().toString());
+                                        editor.putString("DeviceId", ed_device_id.getText().toString());
+                                        editor.putString("AttendanceYN", String.valueOf(faceattndance_yn));
+                                        editor.putString("TasklistYN", String.valueOf(view_select_yn));
+                                        editor.putString("LeaveBalanceYN", String.valueOf(leave_balance_yn));
+
+                                        editor.commit();
+                                        //====================setting shared preference variables, code ends==============
 
                                     }else{
 //

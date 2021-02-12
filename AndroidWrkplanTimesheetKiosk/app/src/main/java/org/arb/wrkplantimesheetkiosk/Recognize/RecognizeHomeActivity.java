@@ -66,21 +66,21 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_takephoto:
-               /* Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 7); //commented for temp
 
 
-                recognize(Temporary.imagetemp);*/ //for temp
+                recognize(Temporary.imagetemp); //for temp
 
                 //---for testing purpose in emulator
-                EmployeeName = "Bhattacharya, Achintya";
+               /* EmployeeName = "Bhattacharya, Achintya";
                 EmployeeCode = "25";
                 Supervisor1 = "a, b ";
                 Supervisor2 = " ";
                 PersonId = 33;
                 Intent intent = new Intent(RecognizeHomeActivity.this, RecognitionOptionActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivity(intent);*/
                 break;
             default:
                 break;

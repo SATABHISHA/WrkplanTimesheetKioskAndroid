@@ -108,7 +108,6 @@
                 android:layout_height="74dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:focusableInTouchMode="true"
                 android:visibility="visible"
                 android:background="@drawable/layout6">
                 <TextView

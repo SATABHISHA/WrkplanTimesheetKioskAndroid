@@ -3,6 +3,7 @@ package org.arb.wrkplantimesheetkiosk.Admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import org.arb.wrkplantimesheetkiosk.R;
 public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener {
     TextView tv_logout;
     LinearLayout ll_settings, ll_emp_img_settings;
+    ImageView img_unit_settings, img_emp_settings;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,11 +26,18 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
 
         tv_logout = findViewById(R.id.tv_logout);
         ll_settings = findViewById(R.id.ll_settings);
+        img_unit_settings = findViewById(R.id.img_unit_settings);
+
         ll_emp_img_settings = findViewById(R.id.ll_emp_img_settings);
+        img_emp_settings = findViewById(R.id.img_emp_settings);
 
         tv_logout.setOnClickListener(this);
+
         ll_settings.setOnClickListener(this);
+        img_unit_settings.setOnClickListener(this);
+
         ll_emp_img_settings.setOnClickListener(this);
+        img_emp_settings.setOnClickListener(this);
     }
 
     @Override
@@ -44,10 +53,21 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
                 intent_settings.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_settings);
                 break;
+            case R.id.img_unit_settings:
+                Intent intent_settings1 = new Intent(this, KioskUnitSettingsActivity.class);
+                intent_settings1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_settings1);
+                break;
+
             case R.id.ll_emp_img_settings:
                 Intent intent_image_settings = new Intent(this, EmployeeImageSettingsActivity.class);
                 intent_image_settings.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_image_settings);
+                break;
+            case R.id.img_emp_settings:
+                Intent intent_image_settings1 = new Intent(this, EmployeeImageSettingsActivity.class);
+                intent_image_settings1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_image_settings1);
                 break;
             default:
                 break;

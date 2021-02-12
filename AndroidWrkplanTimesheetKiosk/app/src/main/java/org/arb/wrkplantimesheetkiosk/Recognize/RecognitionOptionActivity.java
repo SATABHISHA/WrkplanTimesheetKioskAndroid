@@ -1,7 +1,9 @@
 package org.arb.wrkplantimesheetkiosk.Recognize;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,9 +49,12 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
     TextView tv_empname, tv_emp_id, tv_supervisor1, tv_supervisor2;
     RelativeLayout rl_punch_in, rl_break, rl_punch_out, rl_view_select_task, rl_view_leave_balance, rl_cancel;
     LinearLayout ll_break_punchout;
-    TextView tv_view_leave_balance;
+    TextView tv_view_leave_balance, tv_punchtitle1, tv_punchtitle2, tv_breaktitle1, tv_breaktitle2, tv_punch_out_title1, tv_punch_out_title2, tv_view_select_task, tv_cancel;
     public static String checkedInOut, punch_out_break;
     ArrayList<LeaveBalanceItemsModel> leaveBalanceItemsModelArrayList = new ArrayList<>();
+
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +67,24 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         tv_view_leave_balance = findViewById(R.id.tv_view_leave_balance);
 
         rl_punch_in = findViewById(R.id.rl_punch_in);
+        tv_punchtitle1 = findViewById(R.id.tv_punchtitle1);
+        tv_punchtitle2 = findViewById(R.id.tv_punchtitle2);
+
         ll_break_punchout = findViewById(R.id.ll_break_punchout);
         rl_break = findViewById(R.id.rl_break);
+        tv_breaktitle1 = findViewById(R.id.tv_breaktitle1);
+        tv_breaktitle2 = findViewById(R.id.tv_breaktitle2);
+
         rl_punch_out = findViewById(R.id.rl_punch_out);
+        tv_punch_out_title1 = findViewById(R.id.tv_punch_out_title1);
+        tv_punch_out_title2 = findViewById(R.id.tv_punch_out_title2);
+
         rl_view_select_task = findViewById(R.id.rl_view_select_task);
+        tv_view_select_task = findViewById(R.id.tv_view_select_task);
+
         rl_view_leave_balance = findViewById(R.id.rl_view_leave_balance);
         rl_cancel = findViewById(R.id.rl_cancel);
+        tv_cancel = findViewById(R.id.tv_cancel);
 
         tv_empname.setText("Hello\n"+RecognizeHomeActivity.EmployeeName);
         tv_emp_id.setText(String.valueOf(RecognizeHomeActivity.PersonId));
@@ -80,12 +97,37 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         checkAttendanceStatus();
 
         rl_punch_in.setOnClickListener(this);
+        tv_punchtitle1.setOnClickListener(this);
+        tv_punchtitle2.setOnClickListener(this);
+
         rl_break.setOnClickListener(this);
+        tv_breaktitle1.setOnClickListener(this);
+
         rl_punch_out.setOnClickListener(this);
+        tv_punch_out_title1.setOnClickListener(this);
+        tv_punch_out_title2.setOnClickListener(this);
+
         rl_view_select_task.setOnClickListener(this);
+        tv_view_select_task.setOnClickListener(this);
+
         rl_view_leave_balance.setOnClickListener(this);
-        rl_cancel.setOnClickListener(this);
         tv_view_leave_balance.setOnClickListener(this);
+
+        rl_cancel.setOnClickListener(this);
+        tv_cancel.setOnClickListener(this);
+
+
+        sharedPreferences = getApplication().getSharedPreferences("KioskDetails", Context.MODE_PRIVATE);
+        //--to make visibilty on/of using shared pref, code starts
+        if(sharedPreferences.getString("AttendanceYN","").contentEquals("0")){
+            rl_punch_in.setVisibility(View.GONE);
+            ll_break_punchout.setVisibility(View.GONE);
+        }if(sharedPreferences.getString("TasklistYN","").contentEquals("0")){
+            rl_view_select_task.setVisibility(View.GONE);
+        }if(sharedPreferences.getString("LeaveBalanceYN","").contentEquals("0")){
+            rl_view_leave_balance.setVisibility(View.GONE);
+        }
+        //--to make visibilty on/of using shared pref, code ends
 
 
     }
@@ -118,14 +160,14 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                                     Log.d("statusTest",status);*/
 
 
-                                        if (jsonObject.getString("next_action").contentEquals("IN")) {
-                                            rl_punch_in.setVisibility(View.VISIBLE);
-                                            ll_break_punchout.setVisibility(View.GONE);
+                                    if (jsonObject.getString("next_action").contentEquals("IN")) {
+                                        rl_punch_in.setVisibility(View.VISIBLE);
+                                        ll_break_punchout.setVisibility(View.GONE);
 
-                                        } else if (jsonObject.getString("next_action").contentEquals("OUT")){
-                                            rl_punch_in.setVisibility(View.GONE);
-                                            ll_break_punchout.setVisibility(View.VISIBLE);
-                                        }
+                                    } else if (jsonObject.getString("next_action").contentEquals("OUT")){
+                                        rl_punch_in.setVisibility(View.GONE);
+                                        ll_break_punchout.setVisibility(View.VISIBLE);
+                                    }
 
 
                                     loading.dismiss();
@@ -377,20 +419,53 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 saveInOut("IN","PUNCHED_IN");
                 checkedInOut = "You are Punched IN";
                 break;
+            case R.id.tv_punchtitle1:
+                saveInOut("IN","PUNCHED_IN");
+                checkedInOut = "You are Punched IN";
+                break;
+            case R.id.tv_punchtitle2:
+                saveInOut("IN","PUNCHED_IN");
+                checkedInOut = "You are Punched IN";
+                break;
+
             case R.id.rl_break:
 //                break_punchout();
                 checkedInOut = "You are on Break!";
                 punch_out_break = "break";
                 saveInOut("OUT","BREAK_STARTS");
                 break;
+            case R.id.tv_breaktitle1:
+                checkedInOut = "You are on Break!";
+                punch_out_break = "break";
+                saveInOut("OUT","BREAK_STARTS");
+                break;
+            case R.id.tv_breaktitle2:
+                checkedInOut = "You are on Break!";
+                punch_out_break = "break";
+                saveInOut("OUT","BREAK_STARTS");
+                break;
+
             case R.id.rl_punch_out:
                 break_punchout();
                 break;
+            case R.id.tv_punch_out_title1:
+                break_punchout();
+                break;
+            case R.id.tv_punch_out_title2:
+                break_punchout();
+                break;
+
             case R.id.rl_view_select_task:
                 Intent intent = new Intent(RecognitionOptionActivity.this,TaskSelectionActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
+            case R.id.tv_view_select_task:
+                Intent intent1 = new Intent(RecognitionOptionActivity.this,TaskSelectionActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent1);
+                break;
+
             case R.id.rl_view_leave_balance:
                 loadLeaveBalanceData();
                 break;
@@ -402,13 +477,18 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 intent_cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_cancel);
                 break;
+            case R.id.tv_cancel:
+                Intent intent_cancel1 = new Intent(this, HomeActivity.class);
+                intent_cancel1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_cancel1);
+                break;
             default:
                 break;
         }
     }
 
     //---popup for break and punchout, code starts
-  public void break_punchout(){
+    public void break_punchout(){
         //-------custom dialog code starts=========
         LayoutInflater li2 = LayoutInflater.from(this);
         View dialog = li2.inflate(R.layout.dialog_punchout_break, null);

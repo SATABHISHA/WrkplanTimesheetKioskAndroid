@@ -46,6 +46,8 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
     TextView tv_empname, tv_date, tv_time;
     RelativeLayout rl_view_select_task, rl_view_leave_balance, rl_cancel;
     ArrayList<LeaveBalanceItemsModel> leaveBalanceItemsModelArrayList = new ArrayList<>();
+
+    TextView tv_view_select_task, tv_view_leave_balance, tv_cancel;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,9 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
         rl_view_select_task = findViewById(R.id.rl_view_select_task);
         rl_view_leave_balance = findViewById(R.id.rl_view_leave_balance);
         rl_cancel = findViewById(R.id.rl_cancel);
+        tv_view_select_task = findViewById(R.id.tv_view_select_task);
+        tv_view_leave_balance = findViewById(R.id.tv_view_leave_balance);
+        tv_cancel = findViewById(R.id.tv_cancel);
 
         tv_empname.setText(RecognizeHomeActivity.EmployeeName);
 
@@ -74,8 +79,13 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
         //=========get current date and set curretnt date, code ends========
 
         rl_view_select_task.setOnClickListener(this);
+        tv_view_select_task.setOnClickListener(this);
+
         rl_view_leave_balance.setOnClickListener(this);
+        tv_view_leave_balance.setOnClickListener(this);
+
         rl_cancel.setOnClickListener(this);
+        tv_cancel.setOnClickListener(this);
     }
 
     @Override
@@ -86,13 +96,26 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
+            case R.id.tv_view_select_task:
+                Intent intent1 = new Intent(AttendanceRecordActivity.this,TaskSelectionActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent1);
+                break;
             case R.id.rl_view_leave_balance:
+                loadLeaveBalanceData();
+                break;
+            case R.id.tv_view_leave_balance:
                 loadLeaveBalanceData();
                 break;
             case R.id.rl_cancel:
                 Intent intent_cancel = new Intent(this, HomeActivity.class);
                 intent_cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_cancel);
+                break;
+            case R.id.tv_cancel:
+                Intent intent_cancel1 = new Intent(this, HomeActivity.class);
+                intent_cancel1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_cancel1);
                 break;
             default:
                 break;

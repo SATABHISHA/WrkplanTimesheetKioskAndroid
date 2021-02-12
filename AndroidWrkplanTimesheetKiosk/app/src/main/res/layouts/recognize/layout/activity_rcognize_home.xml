@@ -42,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@drawable/layout6"
+            android:background="@drawable/layout"
             android:layout_alignParentBottom="true">
             <TextView
                 android:id="@+id/tv_takephoto"
