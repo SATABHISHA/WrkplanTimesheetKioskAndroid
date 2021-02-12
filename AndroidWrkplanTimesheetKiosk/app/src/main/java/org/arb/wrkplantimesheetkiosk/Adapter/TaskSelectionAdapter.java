@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,12 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
     public void onBindViewHolder(TaskSelectionAdapter.MyViewHolder holder, int position) {
         holder.itemView.setTag(employeeTimesheetModelArrayList.get(position));
         if(employeeTimesheetModelArrayList.get(position).getDefaultTaskYn() == 1){
-            holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode()+ "(Default)");
+            String text1 = getColoredSpanned(employeeTimesheetModelArrayList.get(position).getAccountCode(), "#a7a7a7");
+            String text2 = getColoredSpanned("(Default)","#FF0000");
+
+//            holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode()+ "(Default)");
+//            holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode()+" "+ Html.fromHtml(text));
+            holder.tv_account_code.setText(Html.fromHtml(text1+" "+text2));
             lastCheckedPosition = position;
         }else {
             holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode());
@@ -182,6 +188,9 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
 
     }
 
-
+    private String getColoredSpanned(String text, String color) {
+        String input = "<font color=" + color + ">" + text + "</font>";
+        return input;
+    }
 
 }
