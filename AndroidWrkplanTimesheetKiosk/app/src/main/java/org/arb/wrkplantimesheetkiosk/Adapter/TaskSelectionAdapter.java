@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -68,34 +69,32 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
         holder.itemView.setTag(employeeTimesheetModelArrayList.get(position));
         if(employeeTimesheetModelArrayList.get(position).getDefaultTaskYn() == 1){
             holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode()+ "(Default)");
+            lastCheckedPosition = position;
         }else {
             holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode());
         }
+
         holder.tv_contract.setText(employeeTimesheetModelArrayList.get(position).getContract());
         holder.tv_contract_type.setText(employeeTimesheetModelArrayList.get(position).getLaborCategory());
         holder.tv_hrs.setText(employeeTimesheetModelArrayList.get(position).getHour());
 
-        if(employeeTimesheetModelArrayList.get(position).getDefaultTaskYn() == 1){
 
-//            holder.radio_btn.setChecked(true);
-
-           holder.radio_btn.setSelected(true);
-
-          /* TaskSelectionActivity.ContractID = employeeTimesheetModelArrayList.get(position).getContractID();
-            TaskSelectionActivity.TaskId = employeeTimesheetModelArrayList.get(position).getTaskID();
-            TaskSelectionActivity.LaborCatId = employeeTimesheetModelArrayList.get(position).getLaborCategoryID();
-            TaskSelectionActivity.CostTypeId = employeeTimesheetModelArrayList.get(position).getCostTypeID();*/
-
-        }/*else if(employeeTimesheetModelArrayList.get(position).getDefaultTaskYn() == 0){
-//            holder.radio_btn.setChecked(false);
+        //--added on 12th feb, starts
+        if(employeeTimesheetModelArrayList.get(position).getTempDefault() == 1){
+           lastCheckedPosition = position;
+        }else{
             lastCheckedPosition = -1;
-        }*/
+        }
+        //--added on 12th feb, ends
+
         holder.radio_btn.setChecked(position == lastCheckedPosition);
         if (lastCheckedPosition == position) {
             holder.radio_btn.setChecked(true);
         }else{
             holder.radio_btn.setChecked(false);
         }
+
+
 
     }
 
@@ -109,6 +108,7 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
         public TextView tv_account_code, tv_contract, tv_contract_type, tv_hrs;
         RadioButton radio_btn;
         RelativeLayout relative_layout;
+        ImageView img_demo;
 
 
 
@@ -126,12 +126,13 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
                 public void onClick(View view) {
                     final int position = getAdapterPosition();
                     for(int i=0; i<employeeTimesheetModelArrayList.size(); i++){
-                        employeeTimesheetModelArrayList.get(position).setTempDefault(0);
+                        employeeTimesheetModelArrayList.get(i).setTempDefault(0);
                         Log.d("defaulttest-=>",employeeTimesheetModelArrayList.get(position).getTempDefault().toString());
                     }
                     employeeTimesheetModelArrayList.get(position).setTempDefault(1);
                     Log.d("test-=>",employeeTimesheetModelArrayList.get(position).getTempDefault().toString());
 //                    notifyDataSetChanged();
+
 
                     lastCheckedPosition = getAdapterPosition();
                     notifyItemRangeChanged(0, employeeTimesheetModelArrayList.size());
@@ -147,18 +148,32 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
                     TaskSelectionActivity.LaborCatId = employeeTimesheetModelArrayList.get(position).getLaborCategoryID();
                     TaskSelectionActivity.CostTypeId = employeeTimesheetModelArrayList.get(position).getCostTypeID();
                     TaskSelectionActivity.ACSuffix = employeeTimesheetModelArrayList.get(position).getACSuffix();
+
+                    TaskSelectionActivity.taskSelectionAdapter.notifyDataSetChanged(); //--added on 12th feb
                 }
             });
             radio_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     lastCheckedPosition = getAdapterPosition();
+
+                    //--added on 12th feb, starts
+                    final int position = getAdapterPosition();
+                    for(int i=0; i<employeeTimesheetModelArrayList.size(); i++){
+                        employeeTimesheetModelArrayList.get(i).setTempDefault(0);
+                        Log.d("defaulttest-=>",employeeTimesheetModelArrayList.get(position).getTempDefault().toString());
+                    }
+                    employeeTimesheetModelArrayList.get(position).setTempDefault(1);
+                    //--added on 12th feb, ends
+
                     notifyItemRangeChanged(0, employeeTimesheetModelArrayList.size());
                     TaskSelectionActivity.ContractID = employeeTimesheetModelArrayList.get(lastCheckedPosition).getContractID();
                     TaskSelectionActivity.TaskId = employeeTimesheetModelArrayList.get(lastCheckedPosition).getTaskID();
                     TaskSelectionActivity.LaborCatId = employeeTimesheetModelArrayList.get(lastCheckedPosition).getLaborCategoryID();
                     TaskSelectionActivity.CostTypeId = employeeTimesheetModelArrayList.get(lastCheckedPosition).getCostTypeID();
                     TaskSelectionActivity.ACSuffix = employeeTimesheetModelArrayList.get(lastCheckedPosition).getACSuffix();
+
+                    TaskSelectionActivity.taskSelectionAdapter.notifyDataSetChanged(); //--added on 12th feb
                 }
             });
 

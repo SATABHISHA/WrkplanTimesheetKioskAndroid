@@ -124,6 +124,7 @@ public void loadData(){
 
 //                                recycler_view.setAdapter(new TaskSelectionAdapter(TaskSelectionActivity.this, employeeTimesheetModelArrayList));
                                 recycler_view.setAdapter(taskSelectionAdapter);
+                                taskSelectionAdapter.notifyDataSetChanged(); //--added on 12th feb
 
 
 
