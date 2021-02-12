@@ -49,10 +49,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:background="#ffffff"
         android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_button">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@id/ll_button"
     android:layout_marginLeft="20dp"
     android:layout_marginTop="20dp"
     android:layout_marginRight="20dp"
@@ -62,7 +65,7 @@
         android:layout_height="wrap_content"
         android:text="Corp ID"
         android:textSize="16sp"
-        android:textColor="#4F5256"/>
+        android:textColor="#4F4F4F"/>
     <EditText
         android:id="@+id/ed_corp_id"
         android:layout_width="match_parent"
@@ -78,7 +81,7 @@
         android:layout_marginTop="20dp"
         android:text="Kiosk Unit Name"
         android:textSize="16sp"
-        android:textColor="#4F5256"/>
+        android:textColor="#4F4F4F"/>
     <EditText
         android:id="@+id/ed_kios_unit_name"
         android:layout_width="match_parent"
@@ -94,7 +97,7 @@
         android:layout_marginTop="20dp"
         android:text="Device ID"
         android:textSize="16sp"
-        android:textColor="#4F5256"/>
+        android:textColor="#4F4F4F"/>
     <EditText
         android:id="@+id/ed_device_id"
         android:layout_width="match_parent"
@@ -117,12 +120,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:textColor="#4F4F4F"
             android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Yes"
             android:textSize="16sp"
+            android:textColor="#4F4F4F"
             android:layout_alignParentRight="true"/>
         <TextView
             android:layout_width="wrap_content"
@@ -142,6 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="Face Attendance"
+            android:textColor="#4F4F4F"
             android:textSize="16sp"/>
         <RadioGroup
             android:id="@+id/rg_faceattendance"
@@ -174,12 +180,14 @@
                 android:layout_height="wrap_content"
                 android:text="Yes"
                 android:textSize="16sp"
+                android:textColor="#4F4F4F"
                 android:layout_alignParentRight="true"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No"
                 android:textSize="16sp"
+                android:textColor="#4F4F4F"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="30dp"/>
         </LinearLayout>
@@ -192,6 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:textColor="#4F4F4F"
                 android:text="View / Select / Switch Task"
                 android:textSize="16sp"/>
             <RadioGroup
@@ -225,12 +234,14 @@
                 android:layout_height="wrap_content"
                 android:text="Yes"
                 android:textSize="16sp"
+                android:textColor="#4F4F4F"
                 android:layout_alignParentRight="true"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No"
                 android:textSize="16sp"
+                android:textColor="#4F4F4F"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="30dp"/>
         </LinearLayout>
@@ -244,6 +255,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="View Leave Balance"
+                android:textColor="#4F4F4F"
                 android:textSize="16sp"/>
             <RadioGroup
                 android:id="@+id/rg_leave_balance"
@@ -265,6 +277,7 @@
     </RelativeLayout>
     <!--code for face attendance,(view/se;ect task), leave balance, ends -->
 </LinearLayout>
+        </ScrollView>
         <!--button code starts -->
         <LinearLayout
             android:id="@+id/ll_button"

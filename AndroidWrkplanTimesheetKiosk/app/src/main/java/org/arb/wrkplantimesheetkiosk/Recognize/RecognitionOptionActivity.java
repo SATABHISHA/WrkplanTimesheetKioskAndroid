@@ -69,7 +69,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         rl_view_leave_balance = findViewById(R.id.rl_view_leave_balance);
         rl_cancel = findViewById(R.id.rl_cancel);
 
-        tv_empname.setText(RecognizeHomeActivity.EmployeeName);
+        tv_empname.setText("Hello\n"+RecognizeHomeActivity.EmployeeName);
         tv_emp_id.setText(String.valueOf(RecognizeHomeActivity.PersonId));
         tv_supervisor1.setText(RecognizeHomeActivity.Supervisor1);
         tv_supervisor2.setText(RecognizeHomeActivity.Supervisor2);
@@ -393,8 +393,10 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 break;
             case R.id.rl_view_leave_balance:
                 loadLeaveBalanceData();
-            /*case R.id.tv_view_leave_balance:
-                loadLeaveBalanceData();*/
+                break;
+            case R.id.tv_view_leave_balance:
+                loadLeaveBalanceData();
+                break;
             case R.id.rl_cancel:
                 Intent intent_cancel = new Intent(this, HomeActivity.class);
                 intent_cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -460,18 +462,18 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
 
 
         String url = Config.BaseUrl+"KioskService.asmx/LeaveBalance";
-//        final ProgressDialog loading = ProgressDialog.show(RecognitionOptionActivity.this, "Loading", "Please wait...", true, false);
+        final ProgressDialog loading = ProgressDialog.show(RecognitionOptionActivity.this, "Loading", "Please wait...", true, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new
                 Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         getLeaveData(response);
-//                        loading.dismiss();
+                        loading.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                loading.dismiss();
+                loading.dismiss();
                 error.printStackTrace();
             }
         }) {

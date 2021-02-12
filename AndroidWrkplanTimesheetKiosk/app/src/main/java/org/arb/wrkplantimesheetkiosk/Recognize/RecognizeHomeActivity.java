@@ -56,7 +56,7 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_rcognize_home);
         tv_takephoto = findViewById(R.id.tv_takephoto);
         img = findViewById(R.id.img);
-//        img.setBackgroundResource(R.drawable.ab);
+        img.setBackgroundResource(R.drawable.ab);
         tv_takephoto.setOnClickListener(this);
 
         EnableRuntimePermission();
@@ -66,14 +66,14 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_takephoto:
-                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+               /* Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 7); //commented for temp
 
 
-                recognize(Temporary.imagetemp); //for temp
+                recognize(Temporary.imagetemp);*/ //for temp
 
                 //---for testing purpose in emulator
-               /* EmployeeName = "Bhattacharya, Achintya";
+                EmployeeName = "Bhattacharya, Achintya";
                 EmployeeCode = "25";
                 Supervisor1 = "a, b ";
                 Supervisor2 = " ";
@@ -81,7 +81,6 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
                 Intent intent = new Intent(RecognizeHomeActivity.this, RecognitionOptionActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-*/
                 break;
             default:
                 break;
@@ -105,7 +104,7 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
     public void EnableRuntimePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(RecognizeHomeActivity.this,
                 Manifest.permission.CAMERA)) {
-            Toast.makeText(RecognizeHomeActivity.this,"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
+//            Toast.makeText(RecognizeHomeActivity.this,"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(RecognizeHomeActivity.this,new String[]{
                     Manifest.permission.CAMERA}, RequestPermissionCode);

@@ -8,7 +8,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -45,10 +47,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class EmployeeImageSettingsActivity extends AppCompatActivity {
+public class EmployeeImageSettingsActivity extends AppCompatActivity implements View.OnClickListener {
     public static ArrayList<EmployeeImageSettingsModel> employeeImageSettingsModelArrayList = new ArrayList<>();
     RecyclerView recycler_view;
     LinearLayout ll_recycler;
+    TextView tv_back;
 
     public static EmployeeImageSettingsAdapter employeeImageSettingsAdapter;
     public static final int RequestPermissionCode = 1;
@@ -59,6 +62,8 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_employee_settings);
 
         ll_recycler = findViewById(R.id.ll_recycler);
+        tv_back = findViewById(R.id.tv_back);
+
         employeeImageSettingsAdapter = new EmployeeImageSettingsAdapter(this,employeeImageSettingsModelArrayList);
 
         //==========Recycler code initializing and setting layoutManager starts======
@@ -70,6 +75,8 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
         loadData();
 
         EnableRuntimePermission();
+
+        tv_back.setOnClickListener(this);
     }
 
     //---code to load data from api using volley, starts
@@ -202,7 +209,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
     public void EnableRuntimePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(EmployeeImageSettingsActivity.this,
                 Manifest.permission.CAMERA)) {
-            Toast.makeText(getApplicationContext(),"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(),"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(EmployeeImageSettingsActivity.this,new String[]{
                     Manifest.permission.CAMERA}, RequestPermissionCode);
@@ -213,7 +220,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
         switch (requestCode) {
             case RequestPermissionCode:
                 if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(EmployeeImageSettingsActivity.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(EmployeeImageSettingsActivity.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(EmployeeImageSettingsActivity.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
                 }
@@ -325,5 +332,18 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity {
         Intent intent = new Intent(EmployeeImageSettingsActivity.this, AdminHomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_back:
+                Intent intent = new Intent(EmployeeImageSettingsActivity.this, AdminHomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }

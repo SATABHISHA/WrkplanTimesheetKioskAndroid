@@ -241,8 +241,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:visibility="visible"
-                android:focusableInTouchMode="true"
-                android:clickable="true"
                 android:background="@drawable/layout6">
                 <TextView
                     android:id="@+id/tv_view_leave_balance"
@@ -251,7 +249,6 @@
                     android:gravity="center"
                     android:textSize="22sp"
                     android:textColor="#4f4f4f"
-                    android:focusableInTouchMode="true"
                     android:text="View Leave Balance"/>
             </RelativeLayout>
             <RelativeLayout
