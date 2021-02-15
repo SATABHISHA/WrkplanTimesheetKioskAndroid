@@ -1,7 +1,9 @@
 package org.arb.wrkplantimesheetkiosk.Recognize;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,6 +50,7 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
     ArrayList<LeaveBalanceItemsModel> leaveBalanceItemsModelArrayList = new ArrayList<>();
 
     TextView tv_view_select_task, tv_view_leave_balance, tv_cancel;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +89,13 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
 
         rl_cancel.setOnClickListener(this);
         tv_cancel.setOnClickListener(this);
+
+        sharedPreferences = getApplication().getSharedPreferences("KioskDetails", Context.MODE_PRIVATE);
+        if(sharedPreferences.getString("TasklistYN","").contentEquals("0")){
+            rl_view_select_task.setVisibility(View.GONE);
+        }if(sharedPreferences.getString("LeaveBalanceYN","").contentEquals("0")){
+            rl_view_leave_balance.setVisibility(View.GONE);
+        }
     }
 
     @Override

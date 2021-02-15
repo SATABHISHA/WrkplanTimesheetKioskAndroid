@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     EditText edtCorpId,edtUsername,edtPassword;
     LinearLayout btnLogin;
+    TextView tv_login;
     SharedPreferences sharedPreferences;
     ImageButton imgbtn_home;
 
@@ -56,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         imgbtn_home = findViewById(R.id.imgbtn_home);
 
         btnLogin = findViewById(R.id.activity_login_btn_login);
+        tv_login = findViewById(R.id.tv_login);
 
         sharedPreferences = getApplication().getSharedPreferences("LoginDetails", Context.MODE_PRIVATE);
         //=========to check sharedpref and autofill corpid, code starts, added on 12th june=============
@@ -67,6 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btnLogin.setOnClickListener(this);
         imgbtn_home.setOnClickListener(this);
+        tv_login.setOnClickListener(this);
     }
 
 
@@ -259,6 +263,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.activity_login_btn_login:
+                login();
+                break;
+            case R.id.tv_login:
                 login();
                 break;
             case R.id.imgbtn_home:

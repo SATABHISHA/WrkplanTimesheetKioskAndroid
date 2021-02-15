@@ -59,18 +59,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
             android:orientation="vertical"
             android:layout_alignParentBottom="true">
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="87dp"
-                android:background="@drawable/kiosklogo"/>
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:scaleType="center"
+                android:fitsSystemWindows="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/kiosklogo"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Version 1.2021.01.07"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:text="Version 1.2021.02.15"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 android:textSize="14sp"/>
@@ -78,7 +85,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Copyright © 2021 ARB Investments"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:text="Copyright © ARB Investments Company, LLC"
                 android:layout_gravity="center"
                 android:textColor="#3E3D3D"
                 android:textSize="14sp"/>

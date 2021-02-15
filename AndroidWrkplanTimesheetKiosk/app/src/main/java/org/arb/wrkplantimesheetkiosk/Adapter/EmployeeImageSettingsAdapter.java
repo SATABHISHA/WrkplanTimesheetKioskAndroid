@@ -134,6 +134,7 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                         final View dialog = li.inflate(R.layout.dialog_employee_image_alert, null);
                         final TextView tv_title = dialog.findViewById(R.id.tv_title);
                         final TextView tv_body = dialog.findViewById(R.id.tv_body);
+                        final TextView tv_yes = dialog.findViewById(R.id.tv_yes);
                         final LinearLayout ll_yes = dialog.findViewById(R.id.ll_yes);
                         final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
 
@@ -174,6 +175,22 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                                 emp_id = employeeImageSettingsModelArrayList.get(position).getId_person();
 //                            Log.d("base64-=>",base64String);
 
+                            }
+                        });
+                        tv_yes.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                            startActivityForResult(intent, 7); //commented for temp
+                                //commented for temp
+                                intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
+                                ((Activity) context).startActivityForResult(intent, 7);
+                                Toast.makeText(context.getApplicationContext(), employeeImageSettingsModelArrayList.get(position).getEmployee_name(), Toast.LENGTH_LONG).show();
+                                alertDialog.dismiss();
+
+                                name = employeeImageSettingsModelArrayList.get(position).getEmployee_name();
+                                emp_id = employeeImageSettingsModelArrayList.get(position).getId_person();
+//                            Log.d("base64-=>",base64String);
                             }
                         });
                     }else if(employeeImageSettingsModelArrayList.get(position).getAws_action().contentEquals("delete")){

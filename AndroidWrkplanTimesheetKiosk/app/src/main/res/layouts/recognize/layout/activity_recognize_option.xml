@@ -157,7 +157,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="10dp"
-                android:weightSum="50"
                 android:orientation="horizontal">
                 <RelativeLayout
                     android:id="@+id/rl_break"
@@ -167,7 +166,7 @@
                     android:layout_marginRight="17dp"
                     android:gravity="center"
                     android:focusableInTouchMode="true"
-                    android:layout_weight="25">
+                    android:layout_weight="1">
                     <TextView
                         android:id="@+id/tv_breaktitle1"
                         android:layout_width="wrap_content"
@@ -194,7 +193,7 @@
                     android:gravity="center"
                     android:focusableInTouchMode="true"
                     android:layout_marginLeft="17dp"
-                    android:layout_weight="25">
+                    android:layout_weight="1">
                     <TextView
                         android:id="@+id/tv_punch_out_title1"
                         android:layout_width="wrap_content"
