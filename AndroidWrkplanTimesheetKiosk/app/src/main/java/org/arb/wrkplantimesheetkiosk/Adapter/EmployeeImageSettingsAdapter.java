@@ -165,6 +165,7 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                            startActivityForResult(intent, 7); //commented for temp
                                 //commented for temp
+                                intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
                                 ((Activity) context).startActivityForResult(intent, 7);
                                 Toast.makeText(context.getApplicationContext(), employeeImageSettingsModelArrayList.get(position).getEmployee_name(), Toast.LENGTH_LONG).show();
                                 alertDialog.dismiss();

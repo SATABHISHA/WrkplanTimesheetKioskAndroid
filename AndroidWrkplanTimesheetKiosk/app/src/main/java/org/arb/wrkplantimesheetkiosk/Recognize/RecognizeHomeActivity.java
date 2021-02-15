@@ -56,7 +56,7 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_rcognize_home);
         tv_takephoto = findViewById(R.id.tv_takephoto);
         img = findViewById(R.id.img);
-        img.setBackgroundResource(R.drawable.ab);
+//        img.setBackgroundResource(R.drawable.ab);
         tv_takephoto.setOnClickListener(this);
 
         EnableRuntimePermission();
@@ -67,6 +67,7 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()){
             case R.id.tv_takephoto:
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
                 startActivityForResult(intent, 7); //commented for temp
 
 
