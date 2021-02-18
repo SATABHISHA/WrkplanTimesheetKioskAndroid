@@ -86,10 +86,10 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         rl_cancel = findViewById(R.id.rl_cancel);
         tv_cancel = findViewById(R.id.tv_cancel);
 
-        tv_empname.setText("Hello\n"+RecognizeHomeActivity.EmployeeName);
-        tv_emp_id.setText(String.valueOf(RecognizeHomeActivity.PersonId));
-        tv_supervisor1.setText(RecognizeHomeActivity.Supervisor1);
-        tv_supervisor2.setText(RecognizeHomeActivity.Supervisor2);
+        tv_empname.setText("Hello\n"+RecognizeHomeRealtimeActivity.EmployeeName);
+        tv_emp_id.setText(String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
+        tv_supervisor1.setText(RecognizeHomeRealtimeActivity.Supervisor1);
+        tv_supervisor2.setText(RecognizeHomeRealtimeActivity.Supervisor2);
 
         rl_punch_in.setVisibility(View.GONE);
         ll_break_punchout.setVisibility(View.GONE);
@@ -211,7 +211,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("CorpId", "arb-kol-dev");
-                params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
+                params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
 
                 return params;
@@ -310,7 +310,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("CorpId", "arb-kol-dev");
-                params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
+                params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
                 params.put("InOut", SaveInOut);
                 params.put("InOutText", InOutText);
@@ -401,7 +401,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("CorpId", "arb-kol-dev");
-                params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
+                params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
 
                 return params;
@@ -572,7 +572,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 params.put("CorpId", userSingletonModel.getCorpID()); */
 
                 params.put("CorpId","arb-kol-dev");
-                params.put("EmployeeId",String.valueOf(RecognizeHomeActivity.PersonId));
+                params.put("EmployeeId",String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("DateToday",WeekDate);
                 return params;
             }
@@ -623,7 +623,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                         tv_blnc.setVisibility(View.VISIBLE);
 //                        linearlayout2.setVisibility(View.VISIBLE);
 
-                        tv_employee_name.setText(RecognizeHomeActivity.EmployeeName);
+                        tv_employee_name.setText(RecognizeHomeRealtimeActivity.EmployeeName);
 
 
                         tv_blnc_week_date.setText(dateLeaveUpto);

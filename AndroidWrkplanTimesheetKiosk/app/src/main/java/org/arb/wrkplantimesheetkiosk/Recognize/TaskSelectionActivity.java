@@ -53,7 +53,7 @@ public class TaskSelectionActivity extends AppCompatActivity implements View.OnC
         tv_cancel = findViewById(R.id.tv_cancel);
         tv_empname = findViewById(R.id.tv_empname);
 
-        tv_empname.setText(RecognizeHomeActivity.EmployeeName);
+        tv_empname.setText(RecognizeHomeRealtimeActivity.EmployeeName);
         taskSelectionAdapter = new TaskSelectionAdapter(this,employeeTimesheetModelArrayList);
 
         //==========Recycler code initializing and setting layoutManager starts======
@@ -170,7 +170,7 @@ public void loadData(){
         protected Map<String, String> getParams() throws AuthFailureError {
             Map<String, String> params = new HashMap<>();
             params.put("CorpId", "arb-kol-dev");
-            params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
+            params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
             params.put("deviceType", "1");
             params.put("EmpType", "MAIN");
 
@@ -273,7 +273,7 @@ public void loadData(){
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("CorpId", "arb-kol-dev");
-                params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
+                params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
                 params.put("ContractId", String.valueOf(ContractID));
                 params.put("TaskId", String.valueOf(TaskId));

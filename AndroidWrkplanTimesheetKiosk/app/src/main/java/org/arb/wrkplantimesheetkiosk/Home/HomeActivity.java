@@ -11,6 +11,7 @@ import android.widget.TextView;
 import org.arb.wrkplantimesheetkiosk.Admin.LoginActivity;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.arb.wrkplantimesheetkiosk.Recognize.RecognizeHomeActivity;
+import org.arb.wrkplantimesheetkiosk.Recognize.RecognizeHomeRealtimeActivity;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,7 +32,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_rcognize:
-                startActivity(new Intent(this, RecognizeHomeActivity.class));
+                startActivity(new Intent(this, RecognizeHomeRealtimeActivity.class));
                 break;
             case R.id.imgview_btn_profile:
                 startActivity(new Intent(this, LoginActivity.class));

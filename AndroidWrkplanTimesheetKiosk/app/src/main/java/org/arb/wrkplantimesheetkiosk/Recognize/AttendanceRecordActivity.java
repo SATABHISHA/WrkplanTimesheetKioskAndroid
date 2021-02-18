@@ -66,7 +66,7 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
         tv_view_leave_balance = findViewById(R.id.tv_view_leave_balance);
         tv_cancel = findViewById(R.id.tv_cancel);
 
-        tv_empname.setText(RecognizeHomeActivity.EmployeeName);
+        tv_empname.setText(RecognizeHomeRealtimeActivity.EmployeeName);
 
         //=========get current date and set curretnt date, code starts========
         Date c = Calendar.getInstance().getTime();
@@ -181,7 +181,7 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
                 params.put("CorpId", userSingletonModel.getCorpID()); */
 
                 params.put("CorpId","arb-kol-dev");
-                params.put("EmployeeId",String.valueOf(RecognizeHomeActivity.PersonId));
+                params.put("EmployeeId",String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("DateToday",WeekDate);
                 return params;
             }
@@ -232,7 +232,7 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
                         tv_blnc.setVisibility(View.VISIBLE);
 //                        linearlayout2.setVisibility(View.VISIBLE);
 
-                        tv_employee_name.setText(RecognizeHomeActivity.EmployeeName);
+                        tv_employee_name.setText(RecognizeHomeRealtimeActivity.EmployeeName);
 
 
                         tv_blnc_week_date.setText(dateLeaveUpto);
