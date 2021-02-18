@@ -352,7 +352,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
 
 
                                     if (jsonObject.getString("status").contentEquals("true")) {
-                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show(); //--commenting on 18th feb
 
 
                                     } else {

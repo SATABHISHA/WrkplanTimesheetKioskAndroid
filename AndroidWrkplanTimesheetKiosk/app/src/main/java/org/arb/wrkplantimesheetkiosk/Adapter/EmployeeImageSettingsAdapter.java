@@ -267,7 +267,7 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                                         if (jsonObject.getString("Status").contentEquals("true")){
 //                                            loadData();
                                             employeeImageSettingsAdapter.notifyDataSetChanged();
-                                            Toast.makeText(context.getApplicationContext(),jsonObject.getString("Message"),Toast.LENGTH_LONG).show();
+//                                            Toast.makeText(context.getApplicationContext(),jsonObject.getString("Message"),Toast.LENGTH_LONG).show();  // commented n 18th feb
                                             Log.d("result-=>",jsonObject.getString("Message"));
                                             ((Activity)context).finish();
                                             ((Activity)context).startActivity(((Activity)context).getIntent());

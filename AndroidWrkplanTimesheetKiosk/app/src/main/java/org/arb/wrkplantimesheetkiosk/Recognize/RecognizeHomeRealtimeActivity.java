@@ -16,9 +16,11 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +40,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.arb.wrkplantimesheetkiosk.Config.Config;
+import org.arb.wrkplantimesheetkiosk.Home.HomeActivity;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.json.JSONObject;
 import org.json.XML;
@@ -394,7 +397,46 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
                                         } else {
-                                            Toast.makeText(getApplicationContext(), "Couldn't recognize", Toast.LENGTH_LONG).show();
+//                                            Toast.makeText(getApplicationContext(), "Couldn't recognize", Toast.LENGTH_LONG).show();
+
+                                            //---custom dialog for face detection, starts
+                                            LayoutInflater li = LayoutInflater.from(RecognizeHomeRealtimeActivity.this);
+                                            final View dialog = li.inflate(R.layout.dialog_recognize_home_realtime, null);
+
+                                            TextView tv_try_again = dialog.findViewById(R.id.tv_try_again);
+                                            TextView tv_cancel = dialog.findViewById(R.id.tv_cancel);
+
+
+                                            AlertDialog.Builder alert = new AlertDialog.Builder(RecognizeHomeRealtimeActivity.this);
+                                            alert.setView(dialog);
+                                            alert.setCancelable(false);
+                                            //Creating an alert dialog
+                                            final AlertDialog alertDialog = alert.create();
+                                            alertDialog.show();
+
+                                            tv_try_again.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    alertDialog.dismiss();
+                                                    finish();
+                                                    overridePendingTransition( 0, 0);
+                                                    startActivity(getIntent());
+                                                    overridePendingTransition( 0, 0);
+                                                }
+                                            });
+
+                                            tv_cancel.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    alertDialog.dismiss();
+                                                    Intent intent = new Intent(RecognizeHomeRealtimeActivity.this, HomeActivity.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                }
+                                            });
+
+
+                                            //---custom dialog for face detection, ends
                                         }
                                     }else{
                                         Toast.makeText(getApplicationContext(), "Couldn't find any face", Toast.LENGTH_LONG).show();
