@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
     TextView tv_logout;
     LinearLayout ll_settings, ll_emp_img_settings;
     ImageView img_unit_settings, img_emp_settings;
+    RelativeLayout rl_logout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         tv_logout = findViewById(R.id.tv_logout);
         ll_settings = findViewById(R.id.ll_settings);
         img_unit_settings = findViewById(R.id.img_unit_settings);
+        rl_logout = findViewById(R.id.rl_logout);
 
         ll_emp_img_settings = findViewById(R.id.ll_emp_img_settings);
         img_emp_settings = findViewById(R.id.img_emp_settings);
@@ -38,6 +41,8 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
 
         ll_emp_img_settings.setOnClickListener(this);
         img_emp_settings.setOnClickListener(this);
+
+        rl_logout.setOnClickListener(this);
     }
 
     @Override
@@ -47,6 +52,11 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                break;
+            case R.id.rl_logout:
+                Intent intent_rl_logout = new Intent(this, LoginActivity.class);
+                intent_rl_logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent_rl_logout);
                 break;
             case R.id.ll_settings:
                 Intent intent_settings = new Intent(this, KioskUnitSettingsActivity.class);

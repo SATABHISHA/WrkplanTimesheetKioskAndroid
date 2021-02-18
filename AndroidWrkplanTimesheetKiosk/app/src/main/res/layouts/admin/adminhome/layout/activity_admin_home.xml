@@ -26,10 +26,15 @@
                     android:textSize="22sp"
                     android:text="Dashboard"
                     android:layout_centerVertical="true"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     android:textColor="#ffffff"
                     />
 
+                <RelativeLayout
+                    android:id="@+id/rl_logout"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
                 <TextView
                     android:id="@+id/tv_logout"
                     android:layout_width="wrap_content"
@@ -37,9 +42,10 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:text="Logout"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="normal"
                     android:layout_marginRight="15dp" />
+                </RelativeLayout>
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

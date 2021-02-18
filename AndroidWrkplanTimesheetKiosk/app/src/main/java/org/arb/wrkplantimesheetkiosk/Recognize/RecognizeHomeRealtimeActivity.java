@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Build;
@@ -76,6 +78,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
     public static Integer PersonId;
     //--added new
     boolean preview = false;
+    Paint paint = new Paint();
 
     public static final int RequestPermissionCode = 1;
 
@@ -104,11 +107,11 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
             if (faces.length > 0){
 
                 //Just for the first one detected
+
                 Rect Boundary = faces[0].rect;
+//                System.out.println(Boundary);
 
-                System.out.println(Boundary);
-
-//                tryDrawing(Boundary);
+                tryDrawing(Boundary);
                 captureImage();
 //                releaseCamera();
 //                camera.stopPreview();
@@ -521,4 +524,32 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
         }
     }*/
     //--camera permission, ends----
+
+
+
+    //--newly added for trial, starts
+    public void tryDrawing(Rect Boundary) {
+        Log.d("test-=>", "Trying to draw...");
+
+        Canvas canvas = surfaceHolder.lockCanvas();
+
+        if (canvas == null) {
+
+            Log.d("test1-=>", "Cannot draw onto the canvas as it's null");
+
+        } else {
+
+            drawMyStuff(canvas,Boundary);
+            surfaceHolder.unlockCanvasAndPost(canvas);
+        }
+    }
+
+    private void drawMyStuff(final Canvas canvas, Rect Boundary) {
+
+        canvas.drawRect(Boundary.left, Boundary.top, Boundary.right, Boundary.bottom, paint);
+
+        Log.d("test2", "Drawing...");
+
+    }
+//--newly added for trial, ends
 }
