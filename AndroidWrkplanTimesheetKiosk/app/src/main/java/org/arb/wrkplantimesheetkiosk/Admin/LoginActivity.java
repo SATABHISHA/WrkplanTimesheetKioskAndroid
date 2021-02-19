@@ -40,6 +40,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     EditText edtCorpId,edtUsername,edtPassword;
@@ -275,10 +276,67 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.activity_login_btn_login:
-                login();
+                if(edtCorpId.getText().toString().isEmpty() || edtUsername.getText().toString().isEmpty() || edtPassword.getText().toString().isEmpty()) {
+                    if (edtCorpId.getText().toString().isEmpty()) {
+                        View v1 = findViewById(R.id.relativeLayout);
+//                                        new org.arb.gst.config.Snackbar(message,v);
+                        new Snackbar("Userid is required",v1);
+
+                        return;
+                    }
+                    if (edtUsername.getText().toString().isEmpty()) {
+                        View v2 = findViewById(R.id.relativeLayout);
+//                                        new org.arb.gst.config.Snackbar(message,v);
+                        new Snackbar("Username is required",v2);
+
+                        return;
+                    }
+                    if (edtPassword.getText().toString().isEmpty()) {
+                        View v3 = findViewById(R.id.relativeLayout);
+//                                        new org.arb.gst.config.Snackbar(message,v);
+                        new Snackbar("Password  is required",v3);
+                        return;
+                    }
+                }else {
+
+
+                    btnLogin.setEnabled(false);
+                    btnLogin.setClickable(false);
+                    btnLogin.setAlpha(0.4f);
+
+                    login();
+                }
                 break;
             case R.id.tv_login:
-                login();
+//                login();
+
+                if(edtCorpId.getText().toString().isEmpty() || edtUsername.getText().toString().isEmpty() || edtPassword.getText().toString().isEmpty()) {
+                    if (edtCorpId.getText().toString().isEmpty()) {
+                        View v1 = findViewById(R.id.relativeLayout);
+                        new Snackbar("Userid is required",v1);
+
+                        return;
+                    }
+                    if (edtUsername.getText().toString().isEmpty()) {
+                        View v2 = findViewById(R.id.relativeLayout);
+                        new Snackbar("Username is required",v2);
+
+                        return;
+                    }
+                    if (edtPassword.getText().toString().isEmpty()) {
+                        View v3 = findViewById(R.id.relativeLayout);
+                        new Snackbar("Password  is required",v3);
+                        return;
+                    }
+                }else {
+
+
+                    btnLogin.setEnabled(false);
+                    btnLogin.setClickable(false);
+                    btnLogin.setAlpha(0.4f);
+
+                    login();
+                }
                 break;
             case R.id.imgbtn_home:
                 Intent intent = new Intent(this, HomeActivity.class);
