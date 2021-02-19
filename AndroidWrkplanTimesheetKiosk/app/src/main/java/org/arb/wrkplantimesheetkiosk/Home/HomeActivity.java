@@ -1,12 +1,17 @@
 package org.arb.wrkplantimesheetkiosk.Home;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.arb.wrkplantimesheetkiosk.Admin.LoginActivity;
 import org.arb.wrkplantimesheetkiosk.R;
@@ -17,6 +22,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView tv_rcognize;
     ImageView imgview_btn_profile;
+    public static final int RequestPermissionCode = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         tv_rcognize.setOnClickListener(this);
         imgview_btn_profile.setOnClickListener(this);
+
+        EnableRuntimePermission();
     }
 
     @Override
@@ -41,4 +49,29 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    //--camera permission, starts----
+    public void EnableRuntimePermission(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(HomeActivity.this,
+                Manifest.permission.CAMERA)) {
+//            Toast.makeText(RecognizeHomeActivity.this,"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(HomeActivity.this,new String[]{
+                    Manifest.permission.CAMERA}, RequestPermissionCode);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] result) {
+        switch (requestCode) {
+            case RequestPermissionCode:
+                if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
+//                    Toast.makeText(HomeActivity.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(HomeActivity.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+    //--camera permission, ends----
 }

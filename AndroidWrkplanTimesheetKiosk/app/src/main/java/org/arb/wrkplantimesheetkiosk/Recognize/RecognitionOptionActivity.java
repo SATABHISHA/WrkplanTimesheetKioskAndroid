@@ -163,6 +163,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                                     if (jsonObject.getString("next_action").contentEquals("IN")) {
                                         rl_punch_in.setVisibility(View.VISIBLE);
                                         ll_break_punchout.setVisibility(View.GONE);
+                                        rl_view_select_task.setVisibility(View.GONE); //--added on 19th feb
 
                                     } else if (jsonObject.getString("next_action").contentEquals("OUT")){
                                         rl_punch_in.setVisibility(View.GONE);
