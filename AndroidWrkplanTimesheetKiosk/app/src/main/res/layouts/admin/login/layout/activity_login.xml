@@ -70,11 +70,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="85"
+                android:gravity="center"
                 android:background="#2e84bd">
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/corp_id"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/org"
                     android:scaleType="center"/>
             </LinearLayout>
 
@@ -109,11 +110,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="85"
+                android:gravity="center"
                 android:background="#2e84bd">
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/username"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/usernamenew"
                     android:scaleType="center"/>
             </LinearLayout>
 
@@ -147,14 +149,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="85"
+                android:gravity="center"
                 android:background="#2e84bd">
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:scaleType="center"
-                    android:src="@drawable/password" />
+                    android:background="@drawable/passwordnew" />
             </LinearLayout>
 
             <LinearLayout
