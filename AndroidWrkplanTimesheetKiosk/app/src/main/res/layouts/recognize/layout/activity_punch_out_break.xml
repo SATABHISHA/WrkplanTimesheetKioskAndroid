@@ -84,7 +84,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="35dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/kiosklogo"/>
+            android:src="@drawable/kiosklogo"/>
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

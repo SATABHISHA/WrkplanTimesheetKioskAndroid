@@ -257,7 +257,13 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
                                         }else{
-                                            saveOnBreak_saveOnPunchOut();
+                                            saveOnBreak();
+                                            //--added on 23rd dec
+                                            if (punch_out_break == "break"){
+                                                saveOnBreak();
+                                            }else if (punch_out_break == "out"){
+                                                saveOn_PunchOut();
+                                            }
 
                                             Intent intent = new Intent(RecognitionOptionActivity.this, PunchOutBreakActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -324,7 +330,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         requestQueue.add(stringRequest);
     }
 
-    public void saveOnBreak_saveOnPunchOut(){
+    public void saveOnBreak(){
         String url = Config.BaseUrl + "KioskService.asmx/TaskHourUpdate";
 
 
@@ -413,6 +419,192 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         requestQueue.add(stringRequest);
     }
 
+    public void saveOn_PunchOut(){
+        String url = Config.BaseUrl + "KioskService.asmx/TaskHourSubmit";
+
+
+        final ProgressDialog loading = ProgressDialog.show(RecognitionOptionActivity.this, "Loading", "Please wait while loading data", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject jsonObj = null;
+                        try{
+                            jsonObj = XML.toJSONObject(response);
+                            String responseData = jsonObj.toString();
+                            String val = "";
+                            JSONObject resobj = new JSONObject(responseData);
+                            Iterator<?> keys = resobj.keys();
+                            while(keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                if ( resobj.get(key) instanceof JSONObject ) {
+                                    JSONObject xx = new JSONObject(resobj.get(key).toString());
+                                    val = xx.getString("content");
+                                    Log.d("res1",xx.getString("content"));
+                                    JSONObject jsonObject = new JSONObject(val);
+                                   /* String status = jsonObject.getString("status");
+
+                                    Log.d("statusTest",status);*/
+
+
+                                    if (jsonObject.getString("status").contentEquals("true")) {
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show(); //--commenting on 18th feb
+
+
+                                    } else {
+                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                    }
+
+
+                                    loading.dismiss();
+//                                    Toast.makeText(getApplicationContext(),xx.getString("content"),Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            loading.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                loading.dismiss();
+
+
+                String message = "Could not connect server";
+               /* int color = Color.parseColor("#ffffff");
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.relativeLayout), message, 4000);
+
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(color);
+                snackbar.show();*/
+
+               /* View v = findViewById(R.id.relativeLayout);
+                new org.arb.gst.config.Snackbar(message,v);
+                Log.d("Volley Error-=>",error.toString());*/
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                Log.d("Volley Error-=>",error.toString());
+
+                loading.dismiss();
+
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("CorpId", "arb-kol-dev");
+                params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
+                params.put("UserType", "MAIN");
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(RecognitionOptionActivity.this);
+        requestQueue.add(stringRequest);
+    }
+
+    public void saveOn_Cancel(){
+        String url = Config.BaseUrl + "KioskService.asmx/TaskHourSave";
+
+
+        final ProgressDialog loading = ProgressDialog.show(RecognitionOptionActivity.this, "Loading", "Please wait while loading data", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject jsonObj = null;
+                        try{
+                            jsonObj = XML.toJSONObject(response);
+                            String responseData = jsonObj.toString();
+                            String val = "";
+                            JSONObject resobj = new JSONObject(responseData);
+                            Iterator<?> keys = resobj.keys();
+                            while(keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                if ( resobj.get(key) instanceof JSONObject ) {
+                                    JSONObject xx = new JSONObject(resobj.get(key).toString());
+                                    val = xx.getString("content");
+                                    Log.d("res1cancel-=>",xx.getString("content"));
+                                    JSONObject jsonObject = new JSONObject(val);
+                                   /* String status = jsonObject.getString("status");
+
+                                    Log.d("statusTest",status);*/
+
+
+                                    if (jsonObject.getString("status").contentEquals("true")) {
+//                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show(); //--commenting on 18th feb
+
+                                        Intent intent = new Intent(RecognitionOptionActivity.this, HomeActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+
+                                    } else {
+                                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                    }
+
+
+                                    loading.dismiss();
+//                                    Toast.makeText(getApplicationContext(),xx.getString("content"),Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            loading.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+
+
+                String message = "Could not connect server";
+               /* int color = Color.parseColor("#ffffff");
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.relativeLayout), message, 4000);
+
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(color);
+                snackbar.show();*/
+
+               /* View v = findViewById(R.id.relativeLayout);
+                new org.arb.gst.config.Snackbar(message,v);
+                Log.d("Volley Error-=>",error.toString());*/
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                Log.d("Volley Error-=>",error.toString());
+
+                loading.dismiss();
+
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("CorpId", "arb-kol-dev");
+                params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
+                params.put("UserType", "MAIN");
+                params.put("ContractId", "0");
+                params.put("TaskId", "0");
+                params.put("LaborCatId", "0");
+                params.put("CostTypeId", "0");
+                params.put("SuffixCode", "");
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(RecognitionOptionActivity.this);
+        requestQueue.add(stringRequest);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -474,14 +666,16 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 loadLeaveBalanceData();
                 break;
             case R.id.rl_cancel:
-                Intent intent_cancel = new Intent(this, HomeActivity.class);
+                /*Intent intent_cancel = new Intent(this, HomeActivity.class);
                 intent_cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent_cancel);
+                startActivity(intent_cancel);*/
+                saveOn_Cancel();
                 break;
             case R.id.tv_cancel:
-                Intent intent_cancel1 = new Intent(this, HomeActivity.class);
+                /*Intent intent_cancel1 = new Intent(this, HomeActivity.class);
                 intent_cancel1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent_cancel1);
+                startActivity(intent_cancel1);*/
+                saveOn_Cancel();
                 break;
             default:
                 break;

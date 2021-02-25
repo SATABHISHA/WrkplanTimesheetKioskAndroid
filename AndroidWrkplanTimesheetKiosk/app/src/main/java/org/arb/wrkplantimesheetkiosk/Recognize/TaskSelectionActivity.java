@@ -193,9 +193,10 @@ public void loadData(){
                 save();
                 break;
             case R.id.tv_cancel:
-                Intent intent = new Intent(TaskSelectionActivity.this, HomeActivity.class);
+                /*Intent intent = new Intent(TaskSelectionActivity.this, HomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivity(intent);*/
+                save();
                 break;
             default:
                 break;
@@ -229,7 +230,7 @@ public void loadData(){
 
                                     Log.d("statusTest",status);
                                     loading.dismiss();
-                                    Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show(); //--commented on 25th feb as per discussion
 
                                     Intent intent = new Intent(TaskSelectionActivity.this, HomeActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
