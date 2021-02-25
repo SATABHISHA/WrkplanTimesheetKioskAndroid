@@ -65,10 +65,9 @@
             android:layout_alignParentBottom="true">
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginRight="0dp"
                 android:layout_marginLeft="0dp"
-                android:scaleType="center"
                 android:fitsSystemWindows="true"
                 android:adjustViewBounds="true"
                 android:src="@drawable/kiosklogo"/>
@@ -77,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="0dp"
                 android:layout_marginLeft="0dp"
-                android:text="Version 1.2021.02.18"
+                android:text="Version 1.2021.02.25"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 android:textSize="14sp"/>

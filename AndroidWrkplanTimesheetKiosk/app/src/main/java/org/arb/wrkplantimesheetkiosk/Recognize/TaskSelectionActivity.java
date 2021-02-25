@@ -40,7 +40,7 @@ public class TaskSelectionActivity extends AppCompatActivity implements View.OnC
     public static ArrayList<EmployeeTimesheetModel> employeeTimesheetModelArrayList = new ArrayList<>();
     RecyclerView recycler_view;
     LinearLayout ll_recycler;
-    TextView tv_empname;
+    TextView tv_empname, tv_totalhrs;
     public static TaskSelectionAdapter taskSelectionAdapter;
     public static TextView tv_done, tv_cancel;
     public static Integer ContractID = 0, TaskId = 0, LaborCatId = 0, CostTypeId = 0, ACSuffix = 0;
@@ -52,6 +52,7 @@ public class TaskSelectionActivity extends AppCompatActivity implements View.OnC
         tv_done = findViewById(R.id.tv_done);
         tv_cancel = findViewById(R.id.tv_cancel);
         tv_empname = findViewById(R.id.tv_empname);
+        tv_totalhrs = findViewById(R.id.tv_totalhrs);
 
         tv_empname.setText(RecognizeHomeRealtimeActivity.EmployeeName);
         taskSelectionAdapter = new TaskSelectionAdapter(this,employeeTimesheetModelArrayList);
@@ -79,6 +80,10 @@ public void loadData(){
                 public void onResponse(String response) {
                     JSONObject jsonObj = null;
                     try{
+                        if (!employeeTimesheetModelArrayList.isEmpty()){
+                            employeeTimesheetModelArrayList.clear();
+                        }
+                        double total_hrs_count = 0;
                         jsonObj = XML.toJSONObject(response);
                         String responseData = jsonObj.toString();
                         String val = "";
@@ -113,6 +118,8 @@ public void loadData(){
                                     employeeTimesheetModel.setCostTypeID(jsonObject1.getInt("CostTypeID"));
                                     employeeTimesheetModel.setContractID(jsonObject1.getInt("ContractID"));
 
+                                    total_hrs_count = total_hrs_count + Double.parseDouble(jsonObject1.getString("Hour"));
+
                                     if(jsonObject1.getInt("DefaultTaskYn") == 1){
                                         employeeTimesheetModel.setTempDefault(1);
                                     }else{
@@ -122,6 +129,7 @@ public void loadData(){
                                     employeeTimesheetModelArrayList.add(employeeTimesheetModel);
                                 }
 
+                                tv_totalhrs.setText(String.valueOf(total_hrs_count));
 //                                recycler_view.setAdapter(new TaskSelectionAdapter(TaskSelectionActivity.this, employeeTimesheetModelArrayList));
                                 recycler_view.setAdapter(taskSelectionAdapter);
                                 taskSelectionAdapter.notifyDataSetChanged(); //--added on 12th feb
