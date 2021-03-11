@@ -493,7 +493,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
             }
         };
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(35000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(RecognizeHomeRealtimeActivity.this);
         requestQueue.add(stringRequest);
