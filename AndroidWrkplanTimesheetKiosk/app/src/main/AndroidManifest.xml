@@ -12,7 +12,8 @@
         android:roundIcon="@drawable/kioskapplogo"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WrkplanTimesheetKiosk">
+        android:theme="@style/Theme.WrkplanTimesheetKiosk"
+        android:largeHeap="true">
         <activity android:name=".Home.HomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>

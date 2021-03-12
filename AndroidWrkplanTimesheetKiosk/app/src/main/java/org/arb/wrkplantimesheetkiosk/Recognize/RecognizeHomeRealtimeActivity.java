@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -13,7 +15,6 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.FileUtils;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Base64;
@@ -47,6 +48,7 @@ import org.arb.wrkplantimesheetkiosk.R;
 import org.json.JSONObject;
 import org.json.XML;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -315,7 +317,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
     @Override
     public void onPictureTaken(byte[] bytes, Camera camera) {
 //        saveImage(bytes);
-        base64String = Base64.encodeToString(bytes, Base64.NO_WRAP);
+        base64String = resizeBase64Image(Base64.encodeToString(bytes, Base64.NO_WRAP));
         Log.d("base64test-=>",base64String);
         recognize(base64String);
 //        resetCamera(); //--commented temp
@@ -354,6 +356,28 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
         return camId;
     }
 
+    //-----resize/compress image code, added on 12th march, starts------
+    public String resizeBase64Image(String base64image){
+        byte [] encodeByte=Base64.decode(base64image.getBytes(),Base64.DEFAULT);
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inPurgeable = true;
+        Bitmap image = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length,options);
+
+
+        if(image.getHeight() <= 400 && image.getWidth() <= 400){
+            return base64image;
+        }
+        image = Bitmap.createScaledBitmap(image, 150, 150, true);
+
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG,100, baos);
+
+        byte [] b=baos.toByteArray();
+        System.gc();
+        return Base64.encodeToString(b, Base64.NO_WRAP);
+
+    }
+    //-----resize/compress image code, added on 12th march, ends------
     //---------------volley code for login starts-----------
     public void recognize(String imagebase64_string){
 
