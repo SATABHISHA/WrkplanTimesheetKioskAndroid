@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
@@ -84,6 +85,8 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 
     public static final int RequestPermissionCode = 1;
 
+    private static final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,12 +111,12 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
             Log.d("detected-=>","face");
             if (faces.length > 0){
 
-                //Just for the first one detected
-
                 Rect Boundary = faces[0].rect;
 //                System.out.println(Boundary);
 
                 tryDrawing(Boundary);
+
+                //Just for the first one detected
                 captureImage();
 //                releaseCamera();
 //                camera.stopPreview();
@@ -319,9 +322,11 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 //        saveImage(bytes);
         base64String = resizeBase64Image(Base64.encodeToString(bytes, Base64.NO_WRAP));
         Log.d("base64test-=>",base64String);
+
         recognize(base64String);
 //        resetCamera(); //--commented temp
         camera.stopPreview();
+
     }
 
     private void saveImage(byte[] bytes) {
@@ -398,6 +403,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
                     public void onResponse(String response) {
                         JSONObject jsonObj = null;
                         try{
+
                             jsonObj = XML.toJSONObject(response);
                             String responseData = jsonObj.toString();
                             String val = "";
@@ -414,6 +420,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 
                                     Log.d("statusTest",status);*/
                                     if(jsonObject.has("PersonId")) {
+
                                         if (jsonObject.getInt("PersonId") > 0) {
                                             EmployeeName = jsonObject.getString("EmployeeName");
                                             EmployeeCode = jsonObject.getString("EmployeeCode");
