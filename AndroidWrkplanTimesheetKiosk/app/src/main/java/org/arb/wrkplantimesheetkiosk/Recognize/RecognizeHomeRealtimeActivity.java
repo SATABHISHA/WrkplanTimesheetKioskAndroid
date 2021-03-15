@@ -87,6 +87,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -250,6 +251,12 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 
         camera = Camera.open(cameraId);
         camera.setDisplayOrientation(90);
+        //---added on 15th march, code starts
+        /*Camera.Parameters parameters = camera.getParameters();
+        parameters.setPreviewSize(camera, mPreviewSize.height);
+        camera.setParameters(parameters);*/
+        //---added on 15th march, code ends
+
 //        camera = Camera.open(getFrontCameraId());
 
         handler.postDelayed(new Runnable() {
