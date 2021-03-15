@@ -85,7 +85,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 
     public static final int RequestPermissionCode = 1;
 
-    private static final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -209,8 +209,10 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 
     public void captureImage() {
         if (camera != null) {
-            camera.takePicture(null, null, this);
+//                    camera.takePicture(null, null, this);
+            camera.takePicture(null, null, RecognizeHomeRealtimeActivity.this);
         }
+
     }
 
     @Override
@@ -249,7 +251,16 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
         camera = Camera.open(cameraId);
         camera.setDisplayOrientation(90);
 //        camera = Camera.open(getFrontCameraId());
-        camera.setFaceDetectionListener(faceDetectionListener);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 10000ms
+
+                camera.setFaceDetectionListener(faceDetectionListener);
+            }
+        }, 4000); //---as per discussion, face will start detect after few sec(added handler on 15th march 21
+//        camera.setFaceDetectionListener(faceDetectionListener);
     }
 
     @Override
