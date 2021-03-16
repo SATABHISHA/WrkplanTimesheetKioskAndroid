@@ -105,6 +105,8 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
         //------code for filter data, ends
     }
 
+
+
     //---code to load data from api using volley, starts
     public void loadData(){
 
