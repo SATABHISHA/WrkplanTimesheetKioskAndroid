@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +59,8 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
     public static EmployeeImageSettingsAdapter employeeImageSettingsAdapter;
     public static final int RequestPermissionCode = 1;
     public static String base64String;
+
+    EditText edtxt_search;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
 
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_back = findViewById(R.id.tv_back);
+        edtxt_search = findViewById(R.id.edtxt_search);
 
         employeeImageSettingsAdapter = new EmployeeImageSettingsAdapter(this,employeeImageSettingsModelArrayList);
 
@@ -77,6 +83,26 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
         EnableRuntimePermission();
 
         tv_back.setOnClickListener(this);
+
+        //------code for filter data, starts(added on 16th march)
+        edtxt_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //after the change calling the method and passing the search input
+//                filter(editable.toString());
+            }
+        });
+        //------code for filter data, ends
     }
 
     //---code to load data from api using volley, starts
