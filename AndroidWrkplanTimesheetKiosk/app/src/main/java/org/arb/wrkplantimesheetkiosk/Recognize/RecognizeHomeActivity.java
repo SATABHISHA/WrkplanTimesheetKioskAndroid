@@ -32,6 +32,7 @@ import org.arb.wrkplantimesheetkiosk.Config.Config;
 import org.arb.wrkplantimesheetkiosk.Config.ImageUtil;
 import org.arb.wrkplantimesheetkiosk.Config.Temporary;
 import org.arb.wrkplantimesheetkiosk.Home.HomeActivity;
+import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,6 +51,7 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
     public static String EmployeeCode, EmployeeName, Supervisor1, Supervisor2;
     public static Integer PersonId;
 
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
         tv_takephoto.setOnClickListener(this);
 
         EnableRuntimePermission();
+        Log.d("corpidtest-=>",userSingletonModel.getCorpID());
     }
 
     @Override
@@ -217,7 +220,8 @@ public class RecognizeHomeActivity extends AppCompatActivity implements View.OnC
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("ImageBase64", imagebase64_string);
 
                 return params;

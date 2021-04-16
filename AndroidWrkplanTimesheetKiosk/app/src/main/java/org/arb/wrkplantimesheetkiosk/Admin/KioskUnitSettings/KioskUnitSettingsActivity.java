@@ -228,7 +228,8 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("DeviceId", ed_device_id.getText().toString());
                 params.put("UnitName", ed_kios_unit_name.getText().toString());
                 params.put("AttendanceYn", String.valueOf(faceattndance_yn));
@@ -365,7 +366,8 @@ public class KioskUnitSettingsActivity extends AppCompatActivity implements View
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("DeviceId", android_id);
 
                 return params;

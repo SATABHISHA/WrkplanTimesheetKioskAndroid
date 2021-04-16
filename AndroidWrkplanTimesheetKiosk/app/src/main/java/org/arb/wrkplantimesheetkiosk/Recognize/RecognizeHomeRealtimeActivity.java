@@ -45,6 +45,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.arb.wrkplantimesheetkiosk.Config.Config;
 import org.arb.wrkplantimesheetkiosk.Home.HomeActivity;
+import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.json.JSONObject;
 import org.json.XML;
@@ -86,6 +87,8 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
     public static final int RequestPermissionCode = 1;
 
 
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
+
 
 
     @Override
@@ -103,6 +106,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 //                captureImage();
             }
         }
+        Log.d("corpidtest-=>",userSingletonModel.getCorpID());
     }
 
     Camera.FaceDetectionListener faceDetectionListener = new Camera.FaceDetectionListener() {
@@ -535,7 +539,8 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("ImageBase64", imagebase64_string);
 
                 return params;

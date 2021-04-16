@@ -31,6 +31,7 @@ import org.arb.wrkplantimesheetkiosk.Adapter.CustomLeaveBalanceAdapter;
 import org.arb.wrkplantimesheetkiosk.Config.Config;
 import org.arb.wrkplantimesheetkiosk.Home.HomeActivity;
 import org.arb.wrkplantimesheetkiosk.Model.LeaveBalanceItemsModel;
+import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +53,7 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
 
     TextView tv_view_select_task, tv_view_leave_balance, tv_cancel;
     SharedPreferences sharedPreferences;
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +99,8 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
         }if(sharedPreferences.getString("LeaveBalanceYN","").contentEquals("0")){
             rl_view_leave_balance.setVisibility(View.GONE);
         }
+
+        Log.d("corpidtest-=>",userSingletonModel.getCorpID());
     }
 
     @Override
@@ -183,7 +187,8 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
                 params.put("CompanyId",userSingletonModel.getCompID());
                 params.put("CorpId", userSingletonModel.getCorpID()); */
 
-                params.put("CorpId","arb-kol-dev");
+//                params.put("CorpId","arb-kol-dev");
+                params.put("CorpId",userSingletonModel.getCorpID());
                 params.put("EmployeeId",String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("DateToday",WeekDate);
                 return params;
@@ -370,7 +375,8 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
                 params.put("ContractId", "0");

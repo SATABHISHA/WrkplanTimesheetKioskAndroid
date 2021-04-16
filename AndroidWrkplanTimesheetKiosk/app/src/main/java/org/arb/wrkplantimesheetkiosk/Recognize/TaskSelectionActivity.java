@@ -26,6 +26,7 @@ import org.arb.wrkplantimesheetkiosk.Adapter.TaskSelectionAdapter;
 import org.arb.wrkplantimesheetkiosk.Config.Config;
 import org.arb.wrkplantimesheetkiosk.Home.HomeActivity;
 import org.arb.wrkplantimesheetkiosk.Model.EmployeeTimesheetModel;
+import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,6 +45,7 @@ public class TaskSelectionActivity extends AppCompatActivity implements View.OnC
     public static TaskSelectionAdapter taskSelectionAdapter;
     public static TextView tv_done, tv_cancel;
     public static Integer ContractID = 0, TaskId = 0, LaborCatId = 0, CostTypeId = 0, ACSuffix = 0;
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,7 +179,8 @@ public void loadData(){
         @Override
         protected Map<String, String> getParams() throws AuthFailureError {
             Map<String, String> params = new HashMap<>();
-            params.put("CorpId", "arb-kol-dev");
+//            params.put("CorpId", "arb-kol-dev");
+            params.put("CorpId", userSingletonModel.getCorpID());
             params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
             params.put("deviceType", "1");
             params.put("EmpType", "MAIN");
@@ -281,7 +284,8 @@ public void loadData(){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
                 params.put("ContractId", String.valueOf(ContractID));

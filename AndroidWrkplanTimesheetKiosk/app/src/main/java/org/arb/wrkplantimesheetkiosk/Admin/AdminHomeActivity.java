@@ -2,6 +2,7 @@ package org.arb.wrkplantimesheetkiosk.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.arb.wrkplantimesheetkiosk.Admin.EmployeeImageSettings.EmployeeImageSettingsActivity;
 import org.arb.wrkplantimesheetkiosk.Admin.KioskUnitSettings.KioskUnitSettingsActivity;
 import org.arb.wrkplantimesheetkiosk.Home.HomeActivity;
+import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
 
 public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,6 +23,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
     LinearLayout ll_settings, ll_emp_img_settings;
     ImageView img_unit_settings, img_emp_settings;
     RelativeLayout rl_logout;
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,8 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         img_emp_settings.setOnClickListener(this);
 
         rl_logout.setOnClickListener(this);
+
+        Log.d("cordidtesting-=>",userSingletonModel.getCorpID());
     }
 
     @Override

@@ -52,6 +52,7 @@ import java.util.Map;
 
 public class EmployeeImageSettingsActivity extends AppCompatActivity implements View.OnClickListener {
     public static ArrayList<EmployeeImageSettingsModel> employeeImageSettingsModelArrayList = new ArrayList<>();
+    public static ArrayList<EmployeeImageSettingsModel> filteredData = new ArrayList<>();
     RecyclerView recycler_view;
     LinearLayout ll_recycler;
     TextView tv_back;
@@ -60,7 +61,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
     public static final int RequestPermissionCode = 1;
     public static String base64String;
 
-    EditText edtxt_search;
+    EditText ed_search;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +69,9 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
 
         ll_recycler = findViewById(R.id.ll_recycler);
         tv_back = findViewById(R.id.tv_back);
-        edtxt_search = findViewById(R.id.edtxt_search);
+        ed_search = findViewById(R.id.ed_search);
 
-        employeeImageSettingsAdapter = new EmployeeImageSettingsAdapter(this,employeeImageSettingsModelArrayList);
+        employeeImageSettingsAdapter = new EmployeeImageSettingsAdapter(this,filteredData);
 
         //==========Recycler code initializing and setting layoutManager starts======
         recycler_view = findViewById(R.id.recycler_view);
@@ -85,7 +86,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
         tv_back.setOnClickListener(this);
 
         //------code for filter data, starts(added on 16th march)
-        edtxt_search.addTextChangedListener(new TextWatcher() {
+        ed_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -100,6 +101,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
             public void afterTextChanged(Editable editable) {
                 //after the change calling the method and passing the search input
 //                filter(editable.toString());
+                display_filtered_data(ed_search.getText().toString());
             }
         });
         //------code for filter data, ends
@@ -160,8 +162,9 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
 
 //                                recycler_view.setAdapter(new TaskSelectionAdapter(TaskSelectionActivity.this, employeeTimesheetModelArrayList));
 //                                    recycler_view.setAdapter(employeeImageSettingsAdapter);
-                                    recycler_view.setAdapter(new EmployeeImageSettingsAdapter(EmployeeImageSettingsActivity.this,employeeImageSettingsModelArrayList));
+//                                    recycler_view.setAdapter(new EmployeeImageSettingsAdapter(EmployeeImageSettingsActivity.this,employeeImageSettingsModelArrayList)); //--commented on 16th April due search filter
 
+                                    display_filtered_data(""); //--added on 16th April
 
 
 
@@ -218,7 +221,37 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
         requestQueue.add(stringRequest);
     }
     //---code to load data from api using volley, ends
+    //===========code to filter data and display in list, code starts=======
+    public void display_filtered_data(String employeename){
+        if (!filteredData.isEmpty()){
+            filteredData.clear();
+        }
+        if(employeeImageSettingsModelArrayList.size()>0) {
+            for (int i = 0; i < employeeImageSettingsModelArrayList.size(); i++){
+                String employeeName = employeeImageSettingsModelArrayList.get(i).getName_first()+" "+employeeImageSettingsModelArrayList.get(i).getName_last();
+                if(employeeName.toLowerCase().trim().contains(employeename.toLowerCase())){
 
+                    EmployeeImageSettingsModel employeeImageSettingsModel = new EmployeeImageSettingsModel();
+
+                    employeeImageSettingsModel.setEmployee_code(employeeImageSettingsModelArrayList.get(i).getEmployee_code());
+                    employeeImageSettingsModel.setId_person(employeeImageSettingsModelArrayList.get(i).getId_person());
+                    employeeImageSettingsModel.setName_first(employeeImageSettingsModelArrayList.get(i).getName_first());
+                    employeeImageSettingsModel.setName_last(employeeImageSettingsModelArrayList.get(i).getName_last());
+                    employeeImageSettingsModel.setEmployee_name(employeeImageSettingsModelArrayList.get(i).getEmployee_name());
+                    employeeImageSettingsModel.setAws_face_id(employeeImageSettingsModelArrayList.get(i).getAws_face_id());
+                    employeeImageSettingsModel.setAws_action(employeeImageSettingsModelArrayList.get(i).getAws_action());
+                    filteredData.add(employeeImageSettingsModel);
+
+                }
+            }
+            recycler_view.setAdapter(new EmployeeImageSettingsAdapter(EmployeeImageSettingsActivity.this,filteredData));
+        }/*else{
+            ll_recycler.setVisibility(View.GONE);
+            tv_nodata.setVisibility(View.VISIBLE);
+            tv_nodata.setText(jsonObject1.getString("message"));
+        }*/
+    }
+    //===========code to filter data and display in list, code ends=======
     //========Camera code starts=======
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

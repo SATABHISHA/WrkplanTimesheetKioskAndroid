@@ -32,6 +32,7 @@ import org.arb.wrkplantimesheetkiosk.Adapter.CustomLeaveBalanceAdapter;
 import org.arb.wrkplantimesheetkiosk.Config.Config;
 import org.arb.wrkplantimesheetkiosk.Home.HomeActivity;
 import org.arb.wrkplantimesheetkiosk.Model.LeaveBalanceItemsModel;
+import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +55,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
     ArrayList<LeaveBalanceItemsModel> leaveBalanceItemsModelArrayList = new ArrayList<>();
 
     SharedPreferences sharedPreferences;
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -211,7 +213,8 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
 
@@ -316,7 +319,8 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
                 params.put("InOut", SaveInOut);
@@ -407,7 +411,8 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
 
@@ -496,7 +501,8 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
 
@@ -588,7 +594,8 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
                 params.put("ContractId", "0");
@@ -766,7 +773,8 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 params.put("CompanyId",userSingletonModel.getCompID());
                 params.put("CorpId", userSingletonModel.getCorpID()); */
 
-                params.put("CorpId","arb-kol-dev");
+//                params.put("CorpId","arb-kol-dev");
+                params.put("CorpId",userSingletonModel.getCorpID());
                 params.put("EmployeeId",String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("DateToday",WeekDate);
                 return params;

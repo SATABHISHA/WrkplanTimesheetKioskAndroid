@@ -76,7 +76,8 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
     @Override
     public void onBindViewHolder(EmployeeImageSettingsAdapter.MyViewHolder holder, int position) {
         holder.itemView.setTag(employeeImageSettingsModelArrayList.get(position));
-        holder.tv_name.setText(employeeImageSettingsModelArrayList.get(position).getEmployee_name());
+//        holder.tv_name.setText(employeeImageSettingsModelArrayList.get(position).getEmployee_name());
+        holder.tv_name.setText(employeeImageSettingsModelArrayList.get(position).getName_first()+" "+employeeImageSettingsModelArrayList.get(position).getName_last());
         if (employeeImageSettingsModelArrayList.get(position).getAws_action().contentEquals("enroll")){
             holder.tv_status.setText("No\nImage");
             holder.tv_status.setTextColor(Color.parseColor("#9A9A9A"));
@@ -318,7 +319,8 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
-                    params.put("CorpId", "arb-kol-dev");
+//                    params.put("CorpId", "arb-kol-dev");
+                    params.put("CorpId", userSingletonModel.getCorpID());
                     params.put("EmployeeId", emp_id);
                     params.put("FaceId", employeeImageSettingsModelArrayList.get(position).getAws_face_id());
                 /*params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
