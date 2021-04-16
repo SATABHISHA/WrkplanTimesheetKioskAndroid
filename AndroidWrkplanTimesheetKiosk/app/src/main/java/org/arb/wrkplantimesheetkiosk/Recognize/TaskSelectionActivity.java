@@ -32,16 +32,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 
 public class TaskSelectionActivity extends AppCompatActivity implements View.OnClickListener{
     public static ArrayList<EmployeeTimesheetModel> employeeTimesheetModelArrayList = new ArrayList<>();
     RecyclerView recycler_view;
     LinearLayout ll_recycler;
-    TextView tv_empname, tv_totalhrs;
+    TextView tv_empname, tv_totalhrs, tv_date;
     public static TaskSelectionAdapter taskSelectionAdapter;
     public static TextView tv_done, tv_cancel;
     public static Integer ContractID = 0, TaskId = 0, LaborCatId = 0, CostTypeId = 0, ACSuffix = 0;
@@ -55,9 +59,20 @@ public class TaskSelectionActivity extends AppCompatActivity implements View.OnC
         tv_cancel = findViewById(R.id.tv_cancel);
         tv_empname = findViewById(R.id.tv_empname);
         tv_totalhrs = findViewById(R.id.tv_totalhrs);
+        tv_date = findViewById(R.id.tv_date);
 
         tv_empname.setText(RecognizeHomeRealtimeActivity.EmployeeName);
         taskSelectionAdapter = new TaskSelectionAdapter(this,employeeTimesheetModelArrayList);
+
+        //=========get current date and set curretnt date, code starts========
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String formattedDate = df.format(c);
+
+        tv_date.setText(formattedDate);
+        //=========get current date and set curretnt date, code ends========
 
         //==========Recycler code initializing and setting layoutManager starts======
         recycler_view = findViewById(R.id.recycler_view);
