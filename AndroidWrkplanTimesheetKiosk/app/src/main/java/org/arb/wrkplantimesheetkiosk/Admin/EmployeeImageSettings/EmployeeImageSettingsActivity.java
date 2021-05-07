@@ -38,6 +38,7 @@ import org.arb.wrkplantimesheetkiosk.Config.Config;
 import org.arb.wrkplantimesheetkiosk.Config.ImageUtil;
 import org.arb.wrkplantimesheetkiosk.Model.EmployeeImageSettingsModel;
 import org.arb.wrkplantimesheetkiosk.Model.EmployeeTimesheetModel;
+import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.arb.wrkplantimesheetkiosk.Recognize.RecognizeHomeActivity;
 import org.arb.wrkplantimesheetkiosk.Recognize.TaskSelectionActivity;
@@ -60,6 +61,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
     public static EmployeeImageSettingsAdapter employeeImageSettingsAdapter;
     public static final int RequestPermissionCode = 1;
     public static String base64String;
+    UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
 
     EditText ed_search;
     @Override
@@ -370,7 +372,8 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("EmployeeId", EmployeeImageSettingsAdapter.emp_id);
                 params.put("ImageBase64", image_base64);
                 /*params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
