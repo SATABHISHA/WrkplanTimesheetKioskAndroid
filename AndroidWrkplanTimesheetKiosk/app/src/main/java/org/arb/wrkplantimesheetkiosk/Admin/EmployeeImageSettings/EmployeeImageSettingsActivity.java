@@ -210,7 +210,8 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
                 /*params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
                 params.put("deviceType", "1");
                 params.put("EmpType", "MAIN");*/
