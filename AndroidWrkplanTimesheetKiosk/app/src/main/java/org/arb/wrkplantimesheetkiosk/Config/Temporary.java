@@ -1,5 +1,10 @@
 package org.arb.wrkplantimesheetkiosk.Config;
 
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class Temporary {
     public static String imagetemp = "iVBORw0KGgoAAAANSUhEUgAAAMMAAAEECAIAAAAahxdFAAAAA3NCSVQICAjb4U/gAAAgAElEQVR4\n" +
             "    nDS73ZJlSXKdt/wvYp+TmVXV0xjMDGADgiBE0iSakVcS3/8dZLoQSUmkRGAGg56uqsxz9o5w96WL\n" +
@@ -54,4 +59,6 @@ public class Temporary {
             "    ZcDWafDuNrMBDUQKYYhmiZoAw5dhtw1r0VlpJgsARR7rgqm4OQVyqM1zr4a8Ha6DXnozMdG7jCcb\n" +
             "    jClm9jSNB2QZdu93XgfVS93dfNxL72HW1Z0hjZV07cFObu1S9kolZHGMpnKnPnqXAip3xl11iO3E\n" +
             "    aEA6EFU74JPD+5zAE0/M+F4UQ4Qotce20Xvg9Zjo9pK45HbXO1hs";
+
+
 }

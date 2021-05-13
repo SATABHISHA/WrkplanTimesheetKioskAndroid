@@ -44,6 +44,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.arb.wrkplantimesheetkiosk.Config.Config;
+import org.arb.wrkplantimesheetkiosk.Config.Temporary;
 import org.arb.wrkplantimesheetkiosk.Home.HomeActivity;
 import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
@@ -106,7 +107,18 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 //                captureImage();
             }
         }
-        Log.d("corpidtest-=>",userSingletonModel.getCorpID());
+//        Log.d("corpidtest-=>",userSingletonModel.getCorpID());
+
+        //---temporary code, starts added on 13th may----
+       /* Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mypicsr);
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
+        byte[] byteArray = byteStream.toByteArray();
+        String baseString = Base64.encodeToString(byteArray,Base64.DEFAULT);
+        recognize(baseString);*/
+        //---temporary code, ends added on 13rh may----
+
+       
     }
 
     Camera.FaceDetectionListener faceDetectionListener = new Camera.FaceDetectionListener() {
