@@ -110,7 +110,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 //        Log.d("corpidtest-=>",userSingletonModel.getCorpID());
 
         //---temporary code, starts added on 13th may----
-       /* Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mypicsr);
+        /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mypicsr);
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
         byte[] byteArray = byteStream.toByteArray();
