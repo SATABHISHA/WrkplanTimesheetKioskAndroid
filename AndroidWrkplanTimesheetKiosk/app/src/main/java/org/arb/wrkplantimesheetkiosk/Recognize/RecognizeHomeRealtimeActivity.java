@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -430,7 +432,17 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
         String loginURL = Config.BaseUrl + "KioskService.asmx/RecognizeFace";
 
 
-        final ProgressDialog loading = ProgressDialog.show(RecognizeHomeRealtimeActivity.this, "Recognizing", "Please wait while recognizing face", false, false);
+//        final ProgressDialog loading = ProgressDialog.show(RecognizeHomeRealtimeActivity.this, "Recognizing", "Please wait while recognizing face", false, false);
+        //-------custom dialog code starts=========
+        LayoutInflater li2 = LayoutInflater.from(this);
+        View dialog = li2.inflate(R.layout.dialog_progressbar_image_processing, null);
+        CoordinatorLayout crl = dialog.findViewById(R.id.crl);
+        androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(this);
+        alert.setView(dialog);
+        //Creating an alert dialog
+        final androidx.appcompat.app.AlertDialog alertDialog = alert.create();
+        alertDialog.show();
+        //-------custom dialog code ends=========
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginURL,
                 new Response.Listener<String>() {
                     @Override
@@ -510,21 +522,24 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
                                         Toast.makeText(getApplicationContext(), "Couldn't find any face", Toast.LENGTH_LONG).show();
                                     }
 
-                                    loading.dismiss();
+//                                    loading.dismiss();
+                                    alertDialog.dismiss();
 //                                    Toast.makeText(getApplicationContext(),xx.getString("content"),Toast.LENGTH_LONG).show();
                                 }
                             }
                             Log.d("logintest",responseData);
                         }catch (Exception e){
                             e.printStackTrace();
-                            loading.dismiss();
+//                            loading.dismiss();
+                            alertDialog.dismiss();
                         }
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                loading.dismiss();
+//                loading.dismiss();
+                alertDialog.dismiss();
 
 
 //                String message = "Could not connect server";
@@ -543,7 +558,8 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
                 Log.d("Volley Error-=>",error.toString());
 
-                loading.dismiss();
+//                loading.dismiss();
+                alertDialog.dismiss();
 
 
             }
