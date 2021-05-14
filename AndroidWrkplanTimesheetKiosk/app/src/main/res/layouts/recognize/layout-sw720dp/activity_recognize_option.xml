@@ -38,7 +38,7 @@
             android:id="@+id/tv_empname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="40dp"
@@ -48,8 +48,8 @@
             android:layout_below="@id/tv_empname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
             android:layout_marginTop="35dp"
             android:orientation="vertical">
             <LinearLayout
@@ -65,12 +65,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="30sp"
                     android:text=":"/>
                 <TextView
                     android:id="@+id/tv_emp_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:textSize="30sp"
                     android:text="33"/>
             </LinearLayout>
@@ -87,12 +88,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="30sp"
                     android:text=":"/>
                 <TextView
                     android:id="@+id/tv_supervisor1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:textSize="30sp"
                     android:text="a,b"/>
             </LinearLayout>
@@ -104,17 +106,18 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:textSize="34sp"
+                    android:textSize="30sp"
                     android:text="Supervisor 2"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="30sp"
                     android:text=":"/>
                 <TextView
                     android:id="@+id/tv_supervisor2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:textSize="30sp"
                     android:text=""/>
             </LinearLayout>
@@ -124,8 +127,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
             android:orientation="vertical">
             <RelativeLayout
                 android:id="@+id/rl_punch_in"
