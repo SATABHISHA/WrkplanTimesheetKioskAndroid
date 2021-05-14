@@ -112,12 +112,12 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 //        Log.d("corpidtest-=>",userSingletonModel.getCorpID());
 
         //---temporary code, starts added on 13th may----
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mypicsr);
+       /* Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mypicsr);
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
         byte[] byteArray = byteStream.toByteArray();
         String baseString = Base64.encodeToString(byteArray,Base64.DEFAULT);
-        recognize(baseString);
+        recognize(baseString);*/
         //---temporary code, ends added on 13rh may----
 
        
@@ -284,7 +284,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 
                 camera.setFaceDetectionListener(faceDetectionListener);
             }
-        }, 40000); //---as per discussion, face will start detect after few sec(added handler on 15th march 21
+        }, 4000); //---as per discussion, face will start detect after few sec(added handler on 15th march 21
 //        camera.setFaceDetectionListener(faceDetectionListener);
     }
 
