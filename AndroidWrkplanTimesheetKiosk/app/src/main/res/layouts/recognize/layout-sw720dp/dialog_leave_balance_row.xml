@@ -11,14 +11,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:layout_gravity="right"
             >
             <TextView
                 android:id="@+id/tv_personal"
-                android:layout_width="190dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:gravity="right"
+                android:textSize="28dp"
+                android:gravity="left"
                 android:textColor="#404040"
                 android:text="Sick Personal Leave"/>
             <TextView
@@ -27,17 +26,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:textSize="18dp"
+                android:textSize="28dp"
                 android:textStyle="bold"
                 android:textColor="#404040"
                 android:text=":"/>
             <TextView
                 android:id="@+id/tv_personal_hrs"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:gravity="right"
-                android:layout_height="22dp"
-                android:layout_toRightOf="@id/tv_colon1"
-                android:textSize="18dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textSize="28dp"
                 android:textColor="#404040"
                 android:text="00:00"/>
 
