@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/tv_name"
-                android:layout_width="250dp"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_alignParentLeft="true"
@@ -51,9 +51,9 @@
                 android:text="No\nImage"
                 android:layout_toRightOf="@id/tv_name"
                 android:layout_toLeftOf="@id/ll_enroll"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="12dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="12dp"
                 android:textSize="20sp"
                 android:gravity="center"/>
 
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/layout6"
+                android:background="@drawable/layout_enrollimage_border_remake_enroll"
                 android:layout_marginRight="10dp"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"

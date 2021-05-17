@@ -43,14 +43,25 @@
                 android:textSize="17sp"
                 android:background="#00000000"/>
             <TextView
+                android:id="@+id/tv_tips"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tips for better Recognition result:"
+                android:gravity="left"
+                android:textColor="#000000"
+                android:textSize="17sp"
+                android:background="#00000000"/>
+            <TextView
                 android:id="@+id/tv_body"
                 android:layout_margin="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Do you want to Enroll face image?"
                 android:gravity="left"
-                android:textColor="#383838"
+                android:textColor="#737373"
                 android:textSize="17sp"
                 android:background="#00000000"/>
         </LinearLayout>
@@ -58,7 +69,7 @@
             android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/layout"
+            android:background="@drawable/layout_enroll_image_popup_border_remake"
             android:orientation="horizontal">
 
             <LinearLayout

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -78,24 +79,38 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
         holder.itemView.setTag(employeeImageSettingsModelArrayList.get(position));
 //        holder.tv_name.setText(employeeImageSettingsModelArrayList.get(position).getEmployee_name());
         holder.tv_name.setText(employeeImageSettingsModelArrayList.get(position).getName_first()+" "+employeeImageSettingsModelArrayList.get(position).getName_last());
+
+        /*holder.ll_enroll.setBackgroundResource(R.drawable.layout_enrollimage_border_remake);
+        GradientDrawable drawable = ll_enroll.getBackground();*/
         if (employeeImageSettingsModelArrayList.get(position).getAws_action().contentEquals("enroll")){
             holder.tv_status.setText("No\nImage");
             holder.tv_status.setTextColor(Color.parseColor("#9A9A9A"));
 
             holder.tv_enroll_remove_image.setText("Enroll\nImage");
-            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#4f4f4f"));
+//            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#4f4f4f"));
+            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#494949"));
+//            holder.ll_enroll.setBackgroundColor(Color.parseColor("#D6D6D6"));
+            holder.ll_enroll.setBackgroundResource(R.drawable.layout_enrollimage_border_remake_enroll);
+
+
         }else if (employeeImageSettingsModelArrayList.get(position).getAws_action().contentEquals("delete")){
             holder.tv_status.setText("Image\nEnrolled");
             holder.tv_status.setTextColor(Color.parseColor("#095CB0"));
 
             holder.tv_enroll_remove_image.setText("Remove \n Image");
-            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#8E0A02"));
+//            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#8E0A02"));
+            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#FFFFFF"));
+//            holder.ll_enroll.setBackgroundColor(Color.parseColor("#FC362C"));
+            holder.ll_enroll.setBackgroundResource(R.drawable.layout_enrollimage_border_remake_remove);
         }else {
             holder.tv_status.setText("Image\nEnrolled");
             holder.tv_status.setTextColor(Color.parseColor("#095CB0"));
 
             holder.tv_enroll_remove_image.setText("Remove\nImage");
-            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#8E0A02"));
+//            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#8E0A02"));
+            holder.tv_enroll_remove_image.setTextColor(Color.parseColor("#FFFFFF"));
+//            holder.ll_enroll.setBackgroundColor(Color.parseColor("#FC362C"));
+            holder.ll_enroll.setBackgroundResource(R.drawable.layout_enrollimage_border_remake_remove);
         }
 
 
@@ -123,6 +138,7 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
 
 
 
+
             ll_enroll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -142,7 +158,7 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
 
                         tv_title.setText("Do you want to Enroll face image for "+employeeImageSettingsModelArrayList.get(position).getName_first()+" "+employeeImageSettingsModelArrayList.get(position).getName_last()+" ?");
 
-                        String body = "Tips for better Recognition result: \n1) Individual's face must be seen clearly and focused \n2) Individual's face must be at center of the camera's frame \n3) Avoid dark background";
+                        String body = "1) Individual's head must be at center of the frame \n2) Individual should look directly at the camera \n3) No hair across individual's face or eyes \n4) Individual should not tilt head up/down or left/right \n5) Avoid dark background";
                         tv_body.setText(body);
 
                         AlertDialog.Builder alert = new AlertDialog.Builder(context);

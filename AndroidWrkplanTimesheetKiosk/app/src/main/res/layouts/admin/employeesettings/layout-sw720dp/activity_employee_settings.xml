@@ -61,8 +61,8 @@
             android:layout_height="match_parent"
             android:paddingLeft="0dp"
             android:paddingRight="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="30dp"
             android:visibility="visible"
             android:orientation="vertical">
             <!--Search section newly added on 15th April, code starts -->
