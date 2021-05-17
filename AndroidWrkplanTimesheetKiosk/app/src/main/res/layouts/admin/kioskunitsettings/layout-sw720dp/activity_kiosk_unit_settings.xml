@@ -23,8 +23,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:textSize="34sp"
                     android:text="Kiosk Unit Settings"
+                    android:layout_marginLeft="15dp"
                     android:layout_centerVertical="true"
                     android:textColor="#ffffff"
                     />
@@ -56,23 +57,23 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="20dp"
+    android:layout_marginLeft="35dp"
     android:layout_marginTop="40dp"
-    android:layout_marginRight="20dp"
+    android:layout_marginRight="35dp"
     android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Corp ID"
-        android:textSize="26sp"
+        android:textSize="29sp"
         android:textColor="#4F4F4F"/>
     <EditText
         android:id="@+id/ed_corp_id"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_marginTop="10dp"
-        android:paddingLeft="7dp"
-        android:textSize="24sp"
+        android:paddingLeft="12dp"
+        android:textSize="30sp"
         android:background="@drawable/layout6"/>
 
     <TextView
@@ -80,15 +81,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Kiosk Unit Name"
-        android:textSize="26sp"
+        android:textSize="29sp"
         android:textColor="#4F4F4F"/>
     <EditText
         android:id="@+id/ed_kios_unit_name"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_marginTop="10dp"
-        android:paddingLeft="7dp"
-        android:textSize="24sp"
+        android:paddingLeft="12dp"
+        android:textSize="30sp"
         android:background="@drawable/layout6"/>
 
     <TextView
@@ -96,15 +97,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Device ID"
-        android:textSize="26sp"
+        android:textSize="29sp"
         android:textColor="#4F4F4F"/>
     <EditText
         android:id="@+id/ed_device_id"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_marginTop="10dp"
-        android:paddingLeft="7dp"
-        android:textSize="24sp"
+        android:paddingLeft="12dp"
+        android:textSize="30sp"
         android:editable="false"
         android:background="@drawable/layout6"/>
 
@@ -148,25 +149,32 @@
             android:layout_centerVertical="true"
             android:text="Face Attendance"
             android:textColor="#4F4F4F"
-            android:textSize="26sp"/>
-        <RadioGroup
-            android:id="@+id/rg_faceattendance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal">
+            android:textSize="29sp"/>
 
-            <RadioButton
-                android:id="@+id/rdbtn_face_attnd_yes"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="20dp"/>
-            <RadioButton
-                android:id="@+id/rdbtn_face_attnd_no"
+            <RadioGroup
+                android:id="@+id/rg_faceattendance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"/>
-        </RadioGroup>
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdbtn_face_attnd_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="2dp"/>
+
+                <RadioButton
+                    android:id="@+id/rdbtn_face_attnd_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    android:layout_marginRight="5dp" />
+            </RadioGroup>
         </RelativeLayout>
         <!--Face attendance part ends-->
     <!--View Select part starts-->
@@ -204,7 +212,7 @@
                 android:layout_centerVertical="true"
                 android:textColor="#4F4F4F"
                 android:text="View / Select / Switch Task"
-                android:textSize="26sp"/>
+                android:textSize="29sp"/>
             <RadioGroup
                 android:id="@+id/rg_view_select"
                 android:layout_width="wrap_content"
@@ -215,11 +223,16 @@
                     android:id="@+id/rdbtn_view_select_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"/>
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="2dp"/>
                 <RadioButton
                     android:id="@+id/rdbtn_view_select_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
                     android:layout_marginRight="5dp"/>
             </RadioGroup>
         </RelativeLayout>
@@ -260,7 +273,7 @@
                 android:layout_centerVertical="true"
                 android:text="View Leave Balance"
                 android:textColor="#4F4F4F"
-                android:textSize="26sp"/>
+                android:textSize="29sp"/>
             <RadioGroup
                 android:id="@+id/rg_leave_balance"
                 android:layout_width="wrap_content"
@@ -271,11 +284,16 @@
                     android:id="@+id/rdbtn_leave_balance_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"/>
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="2dp"/>
                 <RadioButton
                     android:id="@+id/rdbtn_leave_balance_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
                     android:layout_marginRight="5dp"/>
             </RadioGroup>
         </RelativeLayout>
@@ -304,7 +322,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:textSize="32sp"
                     android:text="Cancel"/>
             </LinearLayout>
             <LinearLayout
@@ -319,7 +337,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:textSize="32sp"
                     android:text="Done"/>
             </LinearLayout>
         </LinearLayout>
