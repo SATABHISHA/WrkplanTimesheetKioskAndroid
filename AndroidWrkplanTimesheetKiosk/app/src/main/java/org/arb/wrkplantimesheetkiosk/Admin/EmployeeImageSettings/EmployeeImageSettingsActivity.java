@@ -222,7 +222,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-//                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "24");
                 params.put("CorpId", userSingletonModel.getCorpID());
                 /*params.put("UserId", String.valueOf(RecognizeHomeActivity.PersonId));
                 params.put("deviceType", "1");
@@ -440,6 +440,34 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
         //---custom dialog for create gallery, ends
     }
 
+    //-----function on gallery creation confirmation, starts----
+    public void galleryCreationConfirmation(String message){
+        //---custom dialog for create gallery, starts
+        LayoutInflater li = LayoutInflater.from(EmployeeImageSettingsActivity.this);
+        final View dialog = li.inflate(R.layout.dialog_gallery_creation_confirmation, null);
+
+        TextView tv_ok = dialog.findViewById(R.id.tv_ok);
+        TextView tv_body = dialog.findViewById(R.id.tv_body);
+
+//        LinearLayout ll_ok = dialog.findViewById(R.id.ll_ok);
+
+        tv_body.setText(message);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(EmployeeImageSettingsActivity.this);
+        alert.setView(dialog);
+        alert.setCancelable(false);
+        //Creating an alert dialog
+        final AlertDialog alertDialog = alert.create();
+        alertDialog.show();
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+    }
+    //-----function on gallery creation confirmation, ends----
     //--function to call api and create gallery, starts
     public void createGallery(){
 
@@ -477,9 +505,11 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
                                         Toast.makeText(getApplicationContext(),jsonObject.getString("Message"),Toast.LENGTH_LONG).show();
 
                                         loading.dismiss();
+                                        galleryCreationConfirmation("Employee Image Gallery created successfully");
                                         loadData();
                                     }else{
                                         loading.dismiss();
+                                        galleryCreationConfirmation("Sorry! Error creating Employee Image Gallery. Please contact admin.");
                                         Toast.makeText(getApplicationContext(),"Unable to create Gallery",Toast.LENGTH_LONG).show();
 //                                        Log.d("testfalse-=>","false executed");
                                     }
@@ -521,7 +551,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-//                params.put("CorpId", "arb-kol-dev");
+//                params.put("CorpId", "24");
                 params.put("CorpId", userSingletonModel.getCorpID());
 
                 return params;
