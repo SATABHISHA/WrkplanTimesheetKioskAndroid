@@ -36,13 +36,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_above="@id/img_logo">
+            android:gravity="center">
         <ImageView
             android:id="@+id/img_status"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="-28dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/checkedin"/>
         <TextView
@@ -76,7 +75,7 @@
             android:gravity="center"
             android:text="06:10 PM"/>
         </RelativeLayout>
-        <ImageView
+      <!--  <ImageView
             android:id="@+id/img_logo"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -84,7 +83,42 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="35dp"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/kiosklogo"/>
+            android:src="@drawable/kiosklogo"/> -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:fitsSystemWindows="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/kiosklogo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:text="Version 1.2021.05.17"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:textSize="24sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:text="Copyright © ARB Investments Company, LLC"
+                android:layout_gravity="center"
+                android:textColor="#3E3D3D"
+                android:textSize="24sp"/>
+        </LinearLayout>
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

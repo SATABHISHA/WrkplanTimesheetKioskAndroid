@@ -48,7 +48,7 @@
             android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/layout"
+            android:background="@drawable/layout_enroll_image_popup_border_remake"
             android:orientation="horizontal">
             <LinearLayout
                 android:id="@+id/ll_cancel"
