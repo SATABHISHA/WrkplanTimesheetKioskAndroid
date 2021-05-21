@@ -2,6 +2,7 @@ package org.arb.wrkplantimesheetkiosk.Admin.EmployeeImageSettings;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -118,6 +120,7 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
             employeeImageSettingsModelArrayList.clear();
         }
         String url = Config.BaseUrl + "KioskService.asmx/ListFaces";
+        Log.d("urlEmployeeList-=>",url);
 
 
         final ProgressDialog loading = ProgressDialog.show(EmployeeImageSettingsActivity.this, "Loading", "Please wait while loading data", false, false);
@@ -139,40 +142,49 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
                                     val = xx.getString("content");
                                     Log.d("res1-=>",xx.getString("content"));
                                     JSONObject jsonObject = new JSONObject(val);
-                                   /* String status = jsonObject.getString("status");
+                                    /*String status = jsonObject.getString("status");
 
                                     Log.d("statusTest",status);*/
+                                    JSONObject jsonObject_response = jsonObject.getJSONObject("response");
 
-                                    JSONArray jsonArray = jsonObject.getJSONArray("employees");
-                                    for(int i=0; i<jsonArray.length();i++){
-                                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                        EmployeeImageSettingsModel employeeImageSettingsModel = new EmployeeImageSettingsModel();
+                                    if (jsonObject_response.getString("status").contentEquals("true")) {
 
-                                        employeeImageSettingsModel.setEmployee_code(jsonObject1.getString("employee_code"));
-                                        employeeImageSettingsModel.setId_person(jsonObject1.getString("id_person"));
-                                        employeeImageSettingsModel.setName_first(jsonObject1.getString("name_first"));
-                                        employeeImageSettingsModel.setName_last(jsonObject1.getString("name_last"));
-                                        employeeImageSettingsModel.setEmployee_name(jsonObject1.getString("employee_name"));
-                                        employeeImageSettingsModel.setAws_face_id(jsonObject1.getString("aws_face_id"));
-                                        employeeImageSettingsModel.setAws_action(jsonObject1.getString("aws_action"));
+                                        JSONArray jsonArray = jsonObject.getJSONArray("employees");
+                                        for (int i = 0; i < jsonArray.length(); i++) {
+                                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                            EmployeeImageSettingsModel employeeImageSettingsModel = new EmployeeImageSettingsModel();
+
+                                            employeeImageSettingsModel.setEmployee_code(jsonObject1.getString("employee_code"));
+                                            employeeImageSettingsModel.setId_person(jsonObject1.getString("id_person"));
+                                            employeeImageSettingsModel.setName_first(jsonObject1.getString("name_first"));
+                                            employeeImageSettingsModel.setName_last(jsonObject1.getString("name_last"));
+                                            employeeImageSettingsModel.setEmployee_name(jsonObject1.getString("employee_name"));
+                                            employeeImageSettingsModel.setAws_face_id(jsonObject1.getString("aws_face_id"));
+                                            employeeImageSettingsModel.setAws_action(jsonObject1.getString("aws_action"));
 
 
-
-
-                                        employeeImageSettingsModelArrayList.add(employeeImageSettingsModel);
-                                    }
+                                            employeeImageSettingsModelArrayList.add(employeeImageSettingsModel);
+                                        }
 
 //                                recycler_view.setAdapter(new TaskSelectionAdapter(TaskSelectionActivity.this, employeeTimesheetModelArrayList));
 //                                    recycler_view.setAdapter(employeeImageSettingsAdapter);
 //                                    recycler_view.setAdapter(new EmployeeImageSettingsAdapter(EmployeeImageSettingsActivity.this,employeeImageSettingsModelArrayList)); //--commented on 16th April due search filter
 
-                                    display_filtered_data(""); //--added on 16th April
+                                        display_filtered_data(""); //--added on 16th April
 
 
-
-                                    loading.dismiss();
+                                        loading.dismiss();
 //                                    Toast.makeText(getApplicationContext(),xx.getString("content"),Toast.LENGTH_LONG).show();
-                                }
+                                    }else{
+                                        loading.dismiss();
+                                        /*Toast.makeText(getApplicationContext(),"false",Toast.LENGTH_LONG).show();
+                                        Log.d("testfalse-=>","false executed");*/
+                                        openPopupCreateGallery();
+                                    }
+                                }/*else{
+                                    Toast.makeText(getApplicationContext(),"false",Toast.LENGTH_LONG).show();
+                                    Log.d("testfalse-=>","false executed");
+                                }*/
                             }
 
                         }catch (Exception e){
@@ -390,6 +402,137 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
     }
     //---code to enroll image, ends-----
 
+    //-----code to openPopup and create gallery, starts-----
+    public void openPopupCreateGallery(){
+
+        //---custom dialog for create gallery, starts
+        LayoutInflater li = LayoutInflater.from(EmployeeImageSettingsActivity.this);
+        final View dialog = li.inflate(R.layout.dialog_creategallery, null);
+
+        TextView tv_ok = dialog.findViewById(R.id.tv_ok);
+        LinearLayout ll_ok = dialog.findViewById(R.id.ll_ok);
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(EmployeeImageSettingsActivity.this);
+        alert.setView(dialog);
+        alert.setCancelable(false);
+        //Creating an alert dialog
+        final AlertDialog alertDialog = alert.create();
+        alertDialog.show();
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                createGallery();
+//                DeleteImage(position);
+            }
+        });
+
+        /*ll_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });*/
+
+
+        //---custom dialog for create gallery, ends
+    }
+
+    //--function to call api and create gallery, starts
+    public void createGallery(){
+
+        if (!employeeImageSettingsModelArrayList.isEmpty()){
+            employeeImageSettingsModelArrayList.clear();
+        }
+        String url = Config.BaseUrl + "KioskService.asmx/CreateGallery";
+
+
+        final ProgressDialog loading = ProgressDialog.show(EmployeeImageSettingsActivity.this, "Creating Gallery", "Please wait while creating Gallery", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject jsonObj = null;
+                        try{
+                            jsonObj = XML.toJSONObject(response);
+                            String responseData = jsonObj.toString();
+                            String val = "";
+                            JSONObject resobj = new JSONObject(responseData);
+                            Iterator<?> keys = resobj.keys();
+                            while(keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                if ( resobj.get(key) instanceof JSONObject ) {
+                                    JSONObject xx = new JSONObject(resobj.get(key).toString());
+                                    val = xx.getString("content");
+                                    Log.d("res1-=>",xx.getString("content"));
+                                    JSONObject jsonObject = new JSONObject(val);
+                                    /*String status = jsonObject.getString("status");
+
+                                    Log.d("statusTest",status);*/
+//                                    JSONObject jsonObject_response = jsonObject.getJSONObject("response");
+
+                                    if (jsonObject.getString("Status").contentEquals("true")) {
+                                        Toast.makeText(getApplicationContext(),jsonObject.getString("Message"),Toast.LENGTH_LONG).show();
+
+                                        loading.dismiss();
+                                        loadData();
+                                    }else{
+                                        loading.dismiss();
+                                        Toast.makeText(getApplicationContext(),"Unable to create Gallery",Toast.LENGTH_LONG).show();
+//                                        Log.d("testfalse-=>","false executed");
+                                    }
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            loading.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+
+
+                String message = "Could not connect server";
+               /* int color = Color.parseColor("#ffffff");
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.relativeLayout), message, 4000);
+
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(color);
+                snackbar.show();*/
+
+               /* View v = findViewById(R.id.relativeLayout);
+                new org.arb.gst.config.Snackbar(message,v);
+                Log.d("Volley Error-=>",error.toString());*/
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                Log.d("Volley Error-=>",error.toString());
+
+                loading.dismiss();
+
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(EmployeeImageSettingsActivity.this);
+        requestQueue.add(stringRequest);
+    }
+    //--function to call api and create gallery, ends
+    //-----code to openPopup and create gallery, ends-----
 
     @Override
     public void onBackPressed() {
@@ -411,4 +554,5 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
                 break;
         }
     }
+
 }
