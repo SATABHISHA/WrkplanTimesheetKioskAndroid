@@ -48,6 +48,7 @@ public class TaskSelectionActivity extends AppCompatActivity implements View.OnC
     TextView tv_empname, tv_totalhrs, tv_date;
     public static TaskSelectionAdapter taskSelectionAdapter;
     public static TextView tv_done, tv_cancel;
+    public static String EmployeeAssignmentID; //--added on 07-Aug-2021
     public static Integer ContractID = 0, TaskId = 0, LaborCatId = 0, CostTypeId = 0, ACSuffix = 0;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     @Override
@@ -122,6 +123,7 @@ public void loadData(){
                                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                                     EmployeeTimesheetModel employeeTimesheetModel = new EmployeeTimesheetModel();
                                     employeeTimesheetModel.setCostType(jsonObject1.getString("CostType"));
+                                    employeeTimesheetModel.setEmployeeAssignmentID(jsonObject1.getString("EmployeeAssignmentID")); //--added on 07-Aug-2021
                                     employeeTimesheetModel.setTask(jsonObject1.getString("Task"));
                                     employeeTimesheetModel.setContract(jsonObject1.getString("Contract"));
                                     employeeTimesheetModel.setNote(jsonObject1.getString("Note"));
@@ -216,6 +218,8 @@ public void loadData(){
                 Log.d("TaskId",TaskId.toString());
                 Log.d("TaskId",TaskId.toString());
                 Log.d("LaborCatId",LaborCatId.toString());
+                Log.d("EmployeeAssignmentId",EmployeeAssignmentID);
+                Log.d("KioskAttendanceId", RecognitionOptionActivity.attendance_id);
                 save();
                 break;
             case R.id.tv_cancel:
@@ -303,11 +307,13 @@ public void loadData(){
                 params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
-                params.put("ContractId", String.valueOf(ContractID));
+                params.put("EmployeeAssignmentId", EmployeeAssignmentID); //--newly added on 07-Aug-2021
+                params.put("KioskAttendanceId", RecognitionOptionActivity.attendance_id); //--newly added on 07-Aug-2021
+               /* params.put("ContractId", String.valueOf(ContractID));
                 params.put("TaskId", String.valueOf(TaskId));
                 params.put("LaborCatId", String.valueOf(LaborCatId));
                 params.put("CostTypeId", String.valueOf(CostTypeId));
-                params.put("SuffixCode", String.valueOf(ACSuffix));
+                params.put("SuffixCode", String.valueOf(ACSuffix));*/ //--commenetd on 07-Aug-2021
 
                 return params;
             }

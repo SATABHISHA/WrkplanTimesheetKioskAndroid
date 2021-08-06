@@ -1,10 +1,15 @@
 package org.arb.wrkplantimesheetkiosk.Model;
 
 public class EmployeeTimesheetModel {
-    String CostType, Task, Contract, Note, LaborCategory, Hour, AccountCode;
+    String CostType, Task, Contract, Note, LaborCategory, Hour, AccountCode, EmployeeAssignmentID;
     Integer ACSuffix, LaborCategoryID, DefaultTaskYn, TaskID, CostTypeID, ContractID, tempDefault;
 
     //-----Getter method starts-----
+
+
+    public String getEmployeeAssignmentID() {
+        return EmployeeAssignmentID;
+    }
 
     public String getCostType() {
         return CostType;
@@ -65,6 +70,11 @@ public class EmployeeTimesheetModel {
     //-----Getter method ends-----
 
     //-----Setter method starts-----
+
+
+    public void setEmployeeAssignmentID(String employeeAssignmentID) {
+        EmployeeAssignmentID = employeeAssignmentID;
+    }
 
     public void setCostType(String costType) {
         CostType = costType;

@@ -52,6 +52,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
     LinearLayout ll_break_punchout;
     TextView tv_view_leave_balance, tv_punchtitle1, tv_punchtitle2, tv_breaktitle1, tv_breaktitle2, tv_punch_out_title1, tv_punch_out_title2, tv_view_select_task, tv_cancel;
     public static String checkedInOut, punch_out_break;
+    public static String attendance_id; //--added on 07-Aug-2021
     ArrayList<LeaveBalanceItemsModel> leaveBalanceItemsModelArrayList = new ArrayList<>();
 
     SharedPreferences sharedPreferences;
@@ -253,8 +254,10 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
 
                                     Log.d("statusTest",status);*/
 
+                                    attendance_id = jsonObject.getString("attendance_id");
+                                    JSONObject jsonObjectResponse = jsonObject.getJSONObject("response"); //--added on 07-Aug-2021
 
-                                    if (jsonObject.getString("status").contentEquals("true")) {
+                                    if (jsonObjectResponse.getString("status").contentEquals("true")) {
                                         if(SaveInOut.contentEquals("IN")) {
                                             Intent intent = new Intent(RecognitionOptionActivity.this, AttendanceRecordActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
