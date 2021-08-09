@@ -379,11 +379,13 @@ public class AttendanceRecordActivity extends AppCompatActivity implements View.
                 params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
-                params.put("ContractId", "0");
+                params.put("EmployeeAssignmentId", RecognitionOptionActivity.EmployeeAssignmentID); //--newly added on 07-Aug-2021
+                params.put("KioskAttendanceId", RecognitionOptionActivity.attendance_id); //--newly added on 07-Aug-2021
+                /*params.put("ContractId", "0");
                 params.put("TaskId", "0");
                 params.put("LaborCatId", "0");
                 params.put("CostTypeId", "0");
-                params.put("SuffixCode", "");
+                params.put("SuffixCode", "");*/
 
                 return params;
             }

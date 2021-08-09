@@ -53,6 +53,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
     TextView tv_view_leave_balance, tv_punchtitle1, tv_punchtitle2, tv_breaktitle1, tv_breaktitle2, tv_punch_out_title1, tv_punch_out_title2, tv_view_select_task, tv_cancel;
     public static String checkedInOut, punch_out_break;
     public static String attendance_id = "0", EmployeeAssignmentID = "0"; //--added on 07-Aug-2021
+    public static Boolean IsInOutButtonHit; //--added on 09-Aug-2021
     ArrayList<LeaveBalanceItemsModel> leaveBalanceItemsModelArrayList = new ArrayList<>();
 
     SharedPreferences sharedPreferences;
@@ -62,6 +63,10 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognize_option);
+
+        attendance_id = "0"; //--added on 09-Aug-2021
+        EmployeeAssignmentID = "0"; //--added on 09-Aug-2021
+        IsInOutButtonHit = false;
 
         tv_empname = findViewById(R.id.tv_empname);
         tv_emp_id = findViewById(R.id.tv_emp_id);
@@ -621,6 +626,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rl_punch_in:
+                IsInOutButtonHit = true;
                 saveInOut("IN","PUNCHED_IN");
                 checkedInOut = "You are Punched IN";
                 break;

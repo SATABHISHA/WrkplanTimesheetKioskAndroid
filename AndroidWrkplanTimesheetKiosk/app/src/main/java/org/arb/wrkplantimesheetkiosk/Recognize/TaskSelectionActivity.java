@@ -220,6 +220,11 @@ public void loadData(){
                 Log.d("LaborCatId",LaborCatId.toString());
                 Log.d("EmployeeAssignmentId", RecognitionOptionActivity.EmployeeAssignmentID);
                 Log.d("KioskAttendanceId", RecognitionOptionActivity.attendance_id);
+                if(RecognitionOptionActivity.IsInOutButtonHit == true){
+
+                }else{
+
+                }
                 save();
                 break;
             case R.id.tv_cancel:
