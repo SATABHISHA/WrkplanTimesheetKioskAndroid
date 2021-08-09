@@ -220,12 +220,12 @@ public void loadData(){
                 Log.d("LaborCatId",LaborCatId.toString());
                 Log.d("EmployeeAssignmentId", RecognitionOptionActivity.EmployeeAssignmentID);
                 Log.d("KioskAttendanceId", RecognitionOptionActivity.attendance_id);
-                if(RecognitionOptionActivity.IsInOutButtonHit == true){
-
+                if(RecognitionOptionActivity.IsInOutButtonHit == false){
+                    saveInOut("TC","TASK_CHANGED");
                 }else{
-
+                    save();
                 }
-                save();
+//                save();
                 break;
             case R.id.tv_cancel:
                 /*Intent intent = new Intent(TaskSelectionActivity.this, HomeActivity.class);
@@ -327,4 +327,98 @@ public void loadData(){
         RequestQueue requestQueue = Volley.newRequestQueue(TaskSelectionActivity.this);
         requestQueue.add(stringRequest);
     }
+
+    //----added on 09-Aug-2021, to get attendenceid, code starts----
+    public void saveInOut(String SaveInOut, String InOutText){
+        String url = Config.BaseUrl + "KioskService.asmx/SaveAttendance";
+
+
+        final ProgressDialog loading = ProgressDialog.show(TaskSelectionActivity.this, "Loading", "Please wait while loading data", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject jsonObj = null;
+                        try{
+                            jsonObj = XML.toJSONObject(response);
+                            String responseData = jsonObj.toString();
+                            String val = "";
+                            JSONObject resobj = new JSONObject(responseData);
+                            Iterator<?> keys = resobj.keys();
+                            while(keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                if ( resobj.get(key) instanceof JSONObject ) {
+                                    JSONObject xx = new JSONObject(resobj.get(key).toString());
+                                    val = xx.getString("content");
+                                    Log.d("res1",xx.getString("content"));
+                                    JSONObject jsonObject = new JSONObject(val);
+                                   /* String status = jsonObject.getString("status");
+
+                                    Log.d("statusTest",status);*/
+
+                                    RecognitionOptionActivity.attendance_id = jsonObject.getString("attendance_id");
+                                    JSONObject jsonObjectResponse = jsonObject.getJSONObject("response"); //--added on 07-Aug-2021
+
+                                    if (jsonObjectResponse.getString("status").contentEquals("true")) {
+                                        save();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(),"Internal error",Toast.LENGTH_LONG).show();
+                                    }
+
+
+                                    loading.dismiss();
+//                                    Toast.makeText(getApplicationContext(),xx.getString("content"),Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            loading.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+
+
+                String message = "Could not connect server";
+               /* int color = Color.parseColor("#ffffff");
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.relativeLayout), message, 4000);
+
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(color);
+                snackbar.show();*/
+
+               /* View v = findViewById(R.id.relativeLayout);
+                new org.arb.gst.config.Snackbar(message,v);
+                Log.d("Volley Error-=>",error.toString());*/
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                Log.d("Volley Error-=>",error.toString());
+
+                loading.dismiss();
+
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+//                params.put("CorpId", "arb-kol-dev");
+                params.put("CorpId", userSingletonModel.getCorpID());
+                params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
+                params.put("UserType", "MAIN");
+                params.put("InOut", SaveInOut);
+                params.put("InOutText", InOutText);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(TaskSelectionActivity.this);
+        requestQueue.add(stringRequest);
+    }
+    //----added on 09-Aug-2021, to get attendenceid, code ends----
 }
