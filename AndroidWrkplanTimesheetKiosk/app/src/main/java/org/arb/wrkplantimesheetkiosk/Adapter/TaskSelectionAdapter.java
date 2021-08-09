@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.arb.wrkplantimesheetkiosk.Model.EmployeeTimesheetModel;
 import org.arb.wrkplantimesheetkiosk.R;
+import org.arb.wrkplantimesheetkiosk.Recognize.RecognitionOptionActivity;
 import org.arb.wrkplantimesheetkiosk.Recognize.TaskSelectionActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -154,7 +155,7 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
                     TaskSelectionActivity.LaborCatId = employeeTimesheetModelArrayList.get(position).getLaborCategoryID();
                     TaskSelectionActivity.CostTypeId = employeeTimesheetModelArrayList.get(position).getCostTypeID();
                     TaskSelectionActivity.ACSuffix = employeeTimesheetModelArrayList.get(position).getACSuffix();
-                    TaskSelectionActivity.EmployeeAssignmentID = employeeTimesheetModelArrayList.get(position).getEmployeeAssignmentID();
+                    RecognitionOptionActivity.EmployeeAssignmentID = employeeTimesheetModelArrayList.get(position).getEmployeeAssignmentID();
 
                     TaskSelectionActivity.taskSelectionAdapter.notifyDataSetChanged(); //--added on 12th feb
                 }
@@ -179,7 +180,7 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
                     TaskSelectionActivity.LaborCatId = employeeTimesheetModelArrayList.get(lastCheckedPosition).getLaborCategoryID();
                     TaskSelectionActivity.CostTypeId = employeeTimesheetModelArrayList.get(lastCheckedPosition).getCostTypeID();
                     TaskSelectionActivity.ACSuffix = employeeTimesheetModelArrayList.get(lastCheckedPosition).getACSuffix();
-                    TaskSelectionActivity.EmployeeAssignmentID = employeeTimesheetModelArrayList.get(position).getEmployeeAssignmentID();
+                    RecognitionOptionActivity.EmployeeAssignmentID = employeeTimesheetModelArrayList.get(position).getEmployeeAssignmentID();
 
                     TaskSelectionActivity.taskSelectionAdapter.notifyDataSetChanged(); //--added on 12th feb
                 }

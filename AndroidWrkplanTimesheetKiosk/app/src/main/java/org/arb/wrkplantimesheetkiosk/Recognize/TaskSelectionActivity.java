@@ -48,7 +48,7 @@ public class TaskSelectionActivity extends AppCompatActivity implements View.OnC
     TextView tv_empname, tv_totalhrs, tv_date;
     public static TaskSelectionAdapter taskSelectionAdapter;
     public static TextView tv_done, tv_cancel;
-    public static String EmployeeAssignmentID; //--added on 07-Aug-2021
+//    public static String EmployeeAssignmentID; //--added on 07-Aug-2021
     public static Integer ContractID = 0, TaskId = 0, LaborCatId = 0, CostTypeId = 0, ACSuffix = 0;
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
     @Override
@@ -218,7 +218,7 @@ public void loadData(){
                 Log.d("TaskId",TaskId.toString());
                 Log.d("TaskId",TaskId.toString());
                 Log.d("LaborCatId",LaborCatId.toString());
-                Log.d("EmployeeAssignmentId",EmployeeAssignmentID);
+                Log.d("EmployeeAssignmentId", RecognitionOptionActivity.EmployeeAssignmentID);
                 Log.d("KioskAttendanceId", RecognitionOptionActivity.attendance_id);
                 save();
                 break;
@@ -307,7 +307,7 @@ public void loadData(){
                 params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
-                params.put("EmployeeAssignmentId", EmployeeAssignmentID); //--newly added on 07-Aug-2021
+                params.put("EmployeeAssignmentId", RecognitionOptionActivity.EmployeeAssignmentID); //--newly added on 07-Aug-2021
                 params.put("KioskAttendanceId", RecognitionOptionActivity.attendance_id); //--newly added on 07-Aug-2021
                /* params.put("ContractId", String.valueOf(ContractID));
                 params.put("TaskId", String.valueOf(TaskId));

@@ -52,7 +52,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
     LinearLayout ll_break_punchout;
     TextView tv_view_leave_balance, tv_punchtitle1, tv_punchtitle2, tv_breaktitle1, tv_breaktitle2, tv_punch_out_title1, tv_punch_out_title2, tv_view_select_task, tv_cancel;
     public static String checkedInOut, punch_out_break;
-    public static String attendance_id; //--added on 07-Aug-2021
+    public static String attendance_id = "0", EmployeeAssignmentID = "0"; //--added on 07-Aug-2021
     ArrayList<LeaveBalanceItemsModel> leaveBalanceItemsModelArrayList = new ArrayList<>();
 
     SharedPreferences sharedPreferences;
@@ -601,11 +601,13 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 params.put("CorpId", userSingletonModel.getCorpID());
                 params.put("UserId", String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
                 params.put("UserType", "MAIN");
-                params.put("ContractId", "0");
+                params.put("EmployeeAssignmentId", RecognitionOptionActivity.EmployeeAssignmentID); //--newly added on 07-Aug-2021
+                params.put("KioskAttendanceId", RecognitionOptionActivity.attendance_id); //--newly added on 07-Aug-2021
+                /*params.put("ContractId", "0");
                 params.put("TaskId", "0");
                 params.put("LaborCatId", "0");
                 params.put("CostTypeId", "0");
-                params.put("SuffixCode", "");
+                params.put("SuffixCode", "");*/ //--commented on 9th aug
 
                 return params;
             }
