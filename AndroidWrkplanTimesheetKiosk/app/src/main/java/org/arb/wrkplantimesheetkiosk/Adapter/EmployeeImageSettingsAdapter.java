@@ -113,6 +113,8 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
             holder.ll_enroll.setBackgroundResource(R.drawable.layout_enrollimage_border_remake_remove);
         }
 
+//        holder.tv_enroll_remove_image.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
 
     }
 

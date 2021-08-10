@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/top_border_button.xml" value="0.23743589743589744" />
+        <entry key="app/src/main/res/layouts/admin/adminhome/layout/activity_admin_home.xml" value="0.22056159420289856" />
+        <entry key="app/src/main/res/layouts/admin/employeesettings/layout-sw720dp/activity_employee_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layouts/admin/employeesettings/layout/activity_employee_settings.xml" value="0.22056159420289856" />
+        <entry key="app/src/main/res/layouts/admin/employeesettings/layout/activity_employee_settings_row.xml" value="0.33" />
+        <entry key="app/src/main/res/layouts/admin/kioskunitsettings/layout-sw720dp/activity_kiosk_unit_settings.xml" value="0.10475632355374627" />
+        <entry key="app/src/main/res/layouts/admin/kioskunitsettings/layout/activity_kiosk_unit_settings.xml" value="0.21" />
         <entry key="app/src/main/res/layouts/recognize/layout/activity_task_selection.xml" value="0.17" />
       </map>
     </option>

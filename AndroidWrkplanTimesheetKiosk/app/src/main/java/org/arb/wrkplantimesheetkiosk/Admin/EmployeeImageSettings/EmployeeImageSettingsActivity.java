@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -43,6 +44,7 @@ import org.arb.wrkplantimesheetkiosk.Model.EmployeeTimesheetModel;
 import org.arb.wrkplantimesheetkiosk.Model.UserSingletonModel;
 import org.arb.wrkplantimesheetkiosk.R;
 import org.arb.wrkplantimesheetkiosk.Recognize.RecognizeHomeActivity;
+import org.arb.wrkplantimesheetkiosk.Recognize.RecognizeHomeRealtimeActivity;
 import org.arb.wrkplantimesheetkiosk.Recognize.TaskSelectionActivity;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -232,6 +234,10 @@ public class EmployeeImageSettingsActivity extends AppCompatActivity implements 
             }
         };
 
+        /*RequestQueue requestQueue = Volley.newRequestQueue(EmployeeImageSettingsActivity.this);
+        requestQueue.add(stringRequest);*/
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(35000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(EmployeeImageSettingsActivity.this);
         requestQueue.add(stringRequest);
     }

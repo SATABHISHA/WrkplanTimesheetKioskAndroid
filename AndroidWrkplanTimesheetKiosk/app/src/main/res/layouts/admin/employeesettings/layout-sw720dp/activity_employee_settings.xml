@@ -35,10 +35,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
                     android:text="Back"
                     android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:layout_marginRight="15dp" />
+                    android:textStyle="normal" />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -71,18 +71,22 @@
                 android:layout_height="90dp"
                 android:background="#fff"
                 >
+
                 <EditText
                     android:id="@+id/ed_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/img_search_logo"
+                    android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/img_search_logo"
                     android:background="@null"
-                    android:textSize="30sp"
                     android:hint="Type employee name here"
-                    android:padding="5dp"
-                    android:layout_marginLeft="10dp"></EditText>
+                    android:paddingLeft="0dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="30sp"></EditText>
 
                 <ImageView
                     android:id="@+id/img_search_logo"
