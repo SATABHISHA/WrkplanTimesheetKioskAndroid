@@ -154,13 +154,14 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                         final TextView tv_title = dialog.findViewById(R.id.tv_title);
                         final TextView tv_body = dialog.findViewById(R.id.tv_body);
                         final TextView tv_yes = dialog.findViewById(R.id.tv_yes);
+                        final TextView tv_no = dialog.findViewById(R.id.tv_no);
                         final LinearLayout ll_yes = dialog.findViewById(R.id.ll_yes);
                         final LinearLayout ll_no = dialog.findViewById(R.id.ll_no);
 
 
                         tv_title.setText("Do you want to Enroll face image for "+employeeImageSettingsModelArrayList.get(position).getName_first()+" "+employeeImageSettingsModelArrayList.get(position).getName_last()+" ?");
 
-                        String body = "1) Individual's head must be at center of the frame \n2) Individual should look directly at the camera \n3) No hair across individual's face or eyes \n4) Individual should not tilt head up/down or left/right \n5) Avoid dark background";
+                        String body = "1. Individual's head must be at center of the frame \n2. Individual should look directly at the camera \n3. No hair across individual's face or eyes \n4. Individual should not tilt head up/down or left/right \n5. Avoid dark background";
                         tv_body.setText(body);
 
                         AlertDialog.Builder alert = new AlertDialog.Builder(context);
@@ -171,6 +172,12 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                         alertDialog.show();
 
                         ll_no.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                alertDialog.dismiss();
+                            }
+                        });
+                        tv_no.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 alertDialog.dismiss();

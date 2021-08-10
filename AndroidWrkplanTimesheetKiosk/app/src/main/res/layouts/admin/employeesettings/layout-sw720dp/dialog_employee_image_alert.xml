@@ -17,44 +17,50 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:background="#355175">
+
                 <TextView
                     android:id="@+id/tv_accountcode"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:textSize="30sp"
-                    android:textStyle="normal"
+                    android:text="Enroll Alert!"
                     android:textColor="#ffffff"
-                    android:text="Enroll Alert!"/>
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
 
             </RelativeLayout>
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_margin="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Do you want to Enroll face image?"
                 android:gravity="left"
-                android:textColor="#000000"
+                android:textColor="#4f4f4f"
                 android:textSize="27sp"
                 android:background="#00000000"/>
             <TextView
                 android:id="@+id/tv_tips"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tips for better Recognition result:"
                 android:gravity="left"
-                android:textColor="#000000"
+                android:textColor="#4f4f4f"
                 android:textSize="27sp"
                 android:background="#00000000"/>
             <TextView
                 android:id="@+id/tv_body"
-                android:layout_margin="10dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Do you want to Enroll face image?"
@@ -81,9 +87,9 @@
                 <TextView
                     android:id="@+id/tv_yes"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="#000000"
+                    android:textColor="#4f4f4f"
                     android:text="Yes, Proceed"
                     android:textSize="30sp"/>
 
@@ -93,23 +99,23 @@
                 android:layout_height="match_parent"
                 android:background="#c2c2c2"></LinearLayout>
             <LinearLayout
-                android:id="@+id/ll_no"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusableInTouchMode="true"
                 android:layout_weight="1">
                 <LinearLayout
-                    android:id="@+id/tv_no"
+                    android:id="@+id/ll_no"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:layout_weight="1">
                     <TextView
+                        android:id="@+id/tv_no"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:textColor="#000000"
+                        android:textColor="#4f4f4f"
                         android:text="No"
                         android:textSize="30sp"/>
 
