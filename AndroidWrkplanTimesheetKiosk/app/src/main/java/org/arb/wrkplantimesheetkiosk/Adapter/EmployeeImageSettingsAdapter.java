@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.hardware.Camera;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -192,31 +194,45 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                            startActivityForResult(intent, 7); //commented for temp
                                 //commented for temp
-                                intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
+//                                intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
+                                intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
+                                intent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+                                intent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
                                 ((Activity) context).startActivityForResult(intent, 7);
-                                Toast.makeText(context.getApplicationContext(), employeeImageSettingsModelArrayList.get(position).getEmployee_name(), Toast.LENGTH_LONG).show();
+//                                Toast.makeText(context.getApplicationContext(), employeeImageSettingsModelArrayList.get(position).getEmployee_name(), Toast.LENGTH_LONG).show();
                                 alertDialog.dismiss();
 
                                 name = employeeImageSettingsModelArrayList.get(position).getEmployee_name();
                                 emp_id = employeeImageSettingsModelArrayList.get(position).getId_person();
 //                            Log.d("base64-=>",base64String);
+
+
+
 
                             }
                         });
                         tv_yes.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
+
                                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //                            startActivityForResult(intent, 7); //commented for temp
                                 //commented for temp
-                                intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
+//                                intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
+                                intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
+                                intent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+                                intent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
                                 ((Activity) context).startActivityForResult(intent, 7);
-                                Toast.makeText(context.getApplicationContext(), employeeImageSettingsModelArrayList.get(position).getEmployee_name(), Toast.LENGTH_LONG).show();
+//                                Toast.makeText(context.getApplicationContext(), employeeImageSettingsModelArrayList.get(position).getEmployee_name(), Toast.LENGTH_LONG).show();
                                 alertDialog.dismiss();
 
                                 name = employeeImageSettingsModelArrayList.get(position).getEmployee_name();
                                 emp_id = employeeImageSettingsModelArrayList.get(position).getId_person();
 //                            Log.d("base64-=>",base64String);
+
+
+
                             }
                         });
                     }else if(employeeImageSettingsModelArrayList.get(position).getAws_action().contentEquals("delete")){
