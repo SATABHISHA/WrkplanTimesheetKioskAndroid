@@ -22,10 +22,9 @@
                     android:id="@+id/tv_accountcode"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text="Enroll Alert!"
+                    android:gravity="left"
+                    android:text="Enroll Image"
                     android:textColor="#ffffff"
                     android:textSize="17sp"
                     android:textStyle="normal" />
