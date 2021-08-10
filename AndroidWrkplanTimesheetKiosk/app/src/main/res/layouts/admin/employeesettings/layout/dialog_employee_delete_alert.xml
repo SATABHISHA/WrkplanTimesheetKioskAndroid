@@ -17,16 +17,16 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:background="#355175">
+
                 <TextView
                     android:id="@+id/tv_accountcode"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_centerVertical="true"
-                    android:textSize="20sp"
-                    android:textStyle="normal"
+                    android:text="Remove Image"
                     android:textColor="#ffffff"
-                    android:text="Enroll Image Alert!"/>
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
 
             </RelativeLayout>
 
@@ -36,9 +36,9 @@
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:text="Are you sure you want to delete?"
+                android:text="Do you really want to remove this employee image?"
                 android:gravity="center"
-                android:textColor="#383838"
+                android:textColor="#4f4f4f"
                 android:textSize="17sp"
                 android:background="#00000000"/>
         </LinearLayout>
@@ -61,9 +61,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="#000000"
+                    android:textColor="#4f4f4f"
                     android:text="Cancel"
-                    android:textSize="15sp"/>
+                    android:textSize="19sp"/>
 
             </LinearLayout>
             <LinearLayout
@@ -83,9 +83,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="#000000"
-                    android:text="Ok"
-                    android:textSize="15sp"/>
+                    android:textColor="#4f4f4f"
+                    android:text="OK"
+                    android:textSize="19sp"/>
 
             </LinearLayout>
 
