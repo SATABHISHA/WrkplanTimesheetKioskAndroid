@@ -20,10 +20,13 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -441,6 +444,13 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
         alert.setView(dialog);
         //Creating an alert dialog
         final androidx.appcompat.app.AlertDialog alertDialog = alert.create();
+        Window window = alertDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        wlp.gravity = Gravity.BOTTOM;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        wlp.y = 100;
+        window.setAttributes(wlp);
         alertDialog.show();
         //-------custom dialog code ends=========
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginURL,
