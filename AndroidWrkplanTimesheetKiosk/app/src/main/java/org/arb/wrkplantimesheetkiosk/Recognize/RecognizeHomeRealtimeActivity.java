@@ -470,8 +470,16 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
                                         if (jsonObject.getInt("PersonId") > 0) {
                                             EmployeeName = jsonObject.getString("EmployeeName");
                                             EmployeeCode = jsonObject.getString("EmployeeCode");
-                                            Supervisor1 = jsonObject.getString("Supervisor1");
-                                            Supervisor2 = jsonObject.getString("Supervisor2");
+                                            if(jsonObject.getString("Supervisor1").contentEquals("")){
+                                                Supervisor1 = "Unassigned";
+                                            }else {
+                                                Supervisor1 = jsonObject.getString("Supervisor1");
+                                            }
+                                            if(jsonObject.getString("Supervisor1").contentEquals("")){
+                                                Supervisor2 = "Unassigned";
+                                            }else{
+                                                Supervisor2 = jsonObject.getString("Supervisor2");
+                                            }
                                             PersonId = jsonObject.getInt("PersonId");
                                             Intent intent = new Intent(RecognizeHomeRealtimeActivity.this, RecognitionOptionActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
