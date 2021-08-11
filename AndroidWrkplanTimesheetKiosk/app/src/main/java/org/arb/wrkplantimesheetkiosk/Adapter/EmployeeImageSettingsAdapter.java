@@ -198,6 +198,13 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                                 intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
                                 intent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
                                 intent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
+                                // Samsung
+                                intent.putExtra("camerafacing", "front");
+                                intent.putExtra("previous_mode", "front");
+
+                                // Huawei
+                                intent.putExtra("default_camera", "1");
+                                intent.putExtra("default_mode", "com.huawei.camera2.mode.photo.PhotoMode");
                                 ((Activity) context).startActivityForResult(intent, 7);
 //                                Toast.makeText(context.getApplicationContext(), employeeImageSettingsModelArrayList.get(position).getEmployee_name(), Toast.LENGTH_LONG).show();
                                 alertDialog.dismiss();
@@ -223,6 +230,14 @@ public class EmployeeImageSettingsAdapter extends RecyclerView.Adapter<EmployeeI
                                 intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
                                 intent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
                                 intent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
+
+                                // Samsung
+                                intent.putExtra("camerafacing", "front");
+                                intent.putExtra("previous_mode", "front");
+
+                                // Huawei
+                                intent.putExtra("default_camera", "1");
+                                intent.putExtra("default_mode", "com.huawei.camera2.mode.photo.PhotoMode");
                                 ((Activity) context).startActivityForResult(intent, 7);
 //                                Toast.makeText(context.getApplicationContext(), employeeImageSettingsModelArrayList.get(position).getEmployee_name(), Toast.LENGTH_LONG).show();
                                 alertDialog.dismiss();
