@@ -631,10 +631,12 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
                 checkedInOut = "You are Punched IN";
                 break;
             case R.id.tv_punchtitle1:
+                IsInOutButtonHit = true;
                 saveInOut("IN","PUNCHED_IN");
                 checkedInOut = "You are Punched IN";
                 break;
             case R.id.tv_punchtitle2:
+                IsInOutButtonHit = true;
                 saveInOut("IN","PUNCHED_IN");
                 checkedInOut = "You are Punched IN";
                 break;
