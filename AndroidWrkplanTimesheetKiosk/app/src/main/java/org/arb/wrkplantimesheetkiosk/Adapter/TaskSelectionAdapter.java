@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,37 +66,48 @@ public class TaskSelectionAdapter extends RecyclerView.Adapter<TaskSelectionAdap
         context = parent.getContext();
         return holder;
     }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 
     @Override
     public void onBindViewHolder(TaskSelectionAdapter.MyViewHolder holder, int position) {
-        holder.itemView.setTag(employeeTimesheetModelArrayList.get(position));
-        if(employeeTimesheetModelArrayList.get(position).getDefaultTaskYn() == 1){
-            String text1 = getColoredSpanned(employeeTimesheetModelArrayList.get(position).getAccountCode(), "#a7a7a7");
+        int updated_position = holder.getAdapterPosition();
+        holder.itemView.setTag(employeeTimesheetModelArrayList.get(updated_position));
+        if(employeeTimesheetModelArrayList.get(updated_position).getDefaultTaskYn() == 1){
+            String text1 = getColoredSpanned(employeeTimesheetModelArrayList.get(updated_position).getAccountCode(), "#a7a7a7");
             String text2 = getColoredSpanned("(Default)","#FF0000");
 
 //            holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode()+ "(Default)");
 //            holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode()+" "+ Html.fromHtml(text));
             holder.tv_account_code.setText(Html.fromHtml(text1+" "+text2));
-            lastCheckedPosition = position;
+            lastCheckedPosition = updated_position;
         }else {
-            holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(position).getAccountCode());
+            holder.tv_account_code.setText(employeeTimesheetModelArrayList.get(updated_position).getAccountCode());
         }
 
-        holder.tv_contract.setText(employeeTimesheetModelArrayList.get(position).getContract());
-        holder.tv_contract_type.setText(employeeTimesheetModelArrayList.get(position).getLaborCategory());
+        holder.tv_contract.setText(employeeTimesheetModelArrayList.get(updated_position).getContract());
+        holder.tv_contract_type.setText(employeeTimesheetModelArrayList.get(updated_position).getLaborCategory());
         holder.tv_hrs.setText(employeeTimesheetModelArrayList.get(position).getHour());
+//        holder.tv_hrs.setText(String.format("%.2f", Double.valueOf(employeeTimesheetModelArrayList.get(position).getHour())));
+//        holder.tv_hrs.setText(String.valueOf(round(Double.valueOf(employeeTimesheetModelArrayList.get(position).getHour()),2)));
 
 
         //--added on 12th feb, starts
-        if(employeeTimesheetModelArrayList.get(position).getTempDefault() == 1){
-           lastCheckedPosition = position;
+        if(employeeTimesheetModelArrayList.get(updated_position).getTempDefault() == 1){
+           lastCheckedPosition = updated_position;
         }else{
             lastCheckedPosition = -1;
         }
         //--added on 12th feb, ends
 
-        holder.radio_btn.setChecked(position == lastCheckedPosition);
-        if (lastCheckedPosition == position) {
+        holder.radio_btn.setChecked(updated_position == lastCheckedPosition);
+        if (lastCheckedPosition == updated_position) {
             holder.radio_btn.setChecked(true);
         }else{
             holder.radio_btn.setChecked(false);

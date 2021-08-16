@@ -64,15 +64,16 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/rl_headline"
             android:background="@drawable/checkedin"/>
+
         <TextView
             android:id="@+id/tv_punch_status"
-            android:layout_below="@id/img_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:textSize="32sp"
+            android:layout_below="@id/img_status"
             android:layout_centerHorizontal="true"
-            android:text="You Are In"/>
+            android:layout_marginTop="25dp"
+            android:text="You Are In"
+            android:textSize="32sp" />
 
         <TextView
             android:id="@+id/tv_date"

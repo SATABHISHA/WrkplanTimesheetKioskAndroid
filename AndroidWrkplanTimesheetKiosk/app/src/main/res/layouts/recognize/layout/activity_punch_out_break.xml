@@ -54,26 +54,28 @@
             android:textSize="32sp"
             android:layout_centerHorizontal="true"
             android:text="You Are on Break!"/>
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_below="@id/tv_punch_status"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="15dp"
-            android:textSize="17sp"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="06-Jan-2021"/>
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_below="@id/tv_date"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="5dp"
-            android:textSize="17sp"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="06:10 PM"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_punch_status"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="06-Jan-2021"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_date"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="06:10 PM"
+                android:textSize="17sp" />
         </RelativeLayout>
         <!--<ImageView
             android:id="@+id/img_logo"

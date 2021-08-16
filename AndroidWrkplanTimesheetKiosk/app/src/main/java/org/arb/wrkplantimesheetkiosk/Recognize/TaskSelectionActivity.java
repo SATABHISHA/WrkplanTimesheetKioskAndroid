@@ -1,5 +1,7 @@
 package org.arb.wrkplantimesheetkiosk.Recognize;
 
+import static org.arb.wrkplantimesheetkiosk.Adapter.TaskSelectionAdapter.round;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -148,7 +150,8 @@ public void loadData(){
                                     employeeTimesheetModelArrayList.add(employeeTimesheetModel);
                                 }
 
-                                tv_totalhrs.setText(String.valueOf(total_hrs_count));
+//                                tv_totalhrs.setText(String.valueOf(total_hrs_count)); //--commented on 16-Aug-2021
+                                tv_totalhrs.setText(String.valueOf(round(Double.valueOf(total_hrs_count),2))); //--added on 16-aug-2021
 //                                recycler_view.setAdapter(new TaskSelectionAdapter(TaskSelectionActivity.this, employeeTimesheetModelArrayList));
                                 recycler_view.setAdapter(taskSelectionAdapter);
                                 taskSelectionAdapter.notifyDataSetChanged(); //--added on 12th feb
