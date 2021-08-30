@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/custom_vertical_line.xml" value="0.22870370370370371" />
         <entry key="app/src/main/res/drawable/top_border_button.xml" value="0.23743589743589744" />
         <entry key="app/src/main/res/layouts/admin/adminhome/layout/activity_admin_home.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layouts/admin/employeesettings/layout-sw720dp/activity_employee_settings.xml" value="0.1" />

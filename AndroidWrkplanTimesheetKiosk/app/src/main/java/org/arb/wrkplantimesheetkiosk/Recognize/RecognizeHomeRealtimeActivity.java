@@ -1,11 +1,13 @@
 package org.arb.wrkplantimesheetkiosk.Recognize;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -19,6 +21,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -94,6 +97,9 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
 
 
     UserSingletonModel userSingletonModel = UserSingletonModel.getInstance();
+    View view_line;
+    DisplayMetrics metrics = new DisplayMetrics(); //--added on 30th Aug
+    public static int height = 0; //--added on 30th Aug
 
 
 
@@ -101,8 +107,43 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognize_home_realtime);
+        view_line = findViewById(R.id.view_line);
+        view_line.setVisibility(View.VISIBLE);
 
         EnableRuntimePermission();
+
+        //--added on 30th Aug, code starts----
+
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        height = metrics.heightPixels;
+        Log.d("ScreenHeight-=>", String.valueOf(height));
+        //----Using thread move line after evry x secs
+        final Thread t = new Thread() {
+            @Override
+            public void run() {
+                while (!isInterrupted()) {
+                    try {
+                        Thread.sleep(1);  //1000ms = 1 sec
+//                        upload_data_delete_sqlite_data_test();
+//                        new UploadData().execute();
+//                        callStraightLine(linePosition);
+                        callLine(linePosition);
+
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        t.start();
+        /*do{
+
+            i++;
+
+        }while(i<=400);*/
+        //--added on 30th Aug, code ends----
 
         surfaceView = findViewById(R.id.surfaceView);
         if (surfaceView != null) {
@@ -243,6 +284,8 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
     }
 
     private void startCamera() {
+
+
 //        camera = Camera.open();
      /*   camera = Camera.open(getFrontCameraId());
         camera.setDisplayOrientation(90);
@@ -289,7 +332,40 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
             }
         }, 4000); //---as per discussion, face will start detect after few sec(added handler on 15th march 21
 //        camera.setFaceDetectionListener(faceDetectionListener);
+
+        //--added on 30th Aug, code starts----
+//        callStraightLine();
+       /* ObjectAnimator animation = ObjectAnimator.ofFloat(view_line, "translationY", 100f);
+        animation.setDuration(1000);
+        animation.start();*/
+        //--added on 30th Aug, code ends----
     }
+    //--added on 30th Aug, code starts----
+//    int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+//    DisplayMetrics displayMetrics = new DisplayMetrics();
+
+//    int height = metrics.heightPixels;
+    public static int linePosition = 0;
+    Boolean flagLastYLimit = false;
+
+    public void callLine(int i){
+        view_line.setY(i);
+        if(linePosition < height && flagLastYLimit == false) {
+            linePosition = i + 1;
+            flagLastYLimit = false;
+            if(linePosition == height){
+                flagLastYLimit = true;
+            }
+        }else if(linePosition <= height && flagLastYLimit == true){
+            linePosition = i - 1;
+            flagLastYLimit = true;
+            if (linePosition == 0){
+                flagLastYLimit = false;
+            }
+        }
+    }
+
+    //--added on 30th Aug, code ends----
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
@@ -362,6 +438,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
         base64String = resizeBase64Image(Base64.encodeToString(bytes, Base64.NO_WRAP));
         Log.d("base64test-=>",base64String);
 
+        view_line.setVisibility(View.INVISIBLE); //--added on 30th aug
         recognize(base64String);
 //        resetCamera(); //--commented temp
         camera.stopPreview();
