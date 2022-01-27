@@ -54,9 +54,19 @@
             android:gravity="center"
             android:text="06-Aug-2021"
             android:textSize="17sp" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_date"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="06:10 PM"
+            android:textSize="17sp" />
         <LinearLayout
             android:id="@+id/ll_headlines"
-            android:layout_below="@id/tv_date"
+            android:layout_below="@id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
