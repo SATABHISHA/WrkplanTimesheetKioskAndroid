@@ -44,10 +44,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 
 public class RecognitionOptionActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView tv_empname, tv_emp_id, tv_supervisor1, tv_supervisor2;
+    TextView tv_empname, tv_emp_id, tv_supervisor1, tv_supervisor2, tv_date;
     RelativeLayout rl_punch_in, rl_break, rl_punch_out, rl_view_select_task, rl_view_leave_balance, rl_cancel;
     LinearLayout ll_break_punchout;
     TextView tv_view_leave_balance, tv_punchtitle1, tv_punchtitle2, tv_breaktitle1, tv_breaktitle2, tv_punch_out_title1, tv_punch_out_title2, tv_view_select_task, tv_cancel;
@@ -69,6 +70,7 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         IsInOutButtonHit = false;
 
         tv_empname = findViewById(R.id.tv_empname);
+        tv_date = findViewById(R.id.tv_date);
         tv_emp_id = findViewById(R.id.tv_emp_id);
         tv_supervisor1 = findViewById(R.id.tv_supervisor1);
         tv_supervisor2 = findViewById(R.id.tv_supervisor2);
@@ -103,6 +105,19 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         ll_break_punchout.setVisibility(View.GONE);
 
         checkAttendanceStatus();
+
+        //=========get current date and set curretnt date, code starts========
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        SimpleDateFormat df_time = new SimpleDateFormat("HH:mm a", Locale.getDefault());
+        String formattedDate = df.format(c);
+        String formattedTime = df_time.format(c);
+
+        tv_date.setText(formattedDate);
+//        tv_time.setText(formattedTime);
+        //=========get current date and set curretnt date, code ends========
 
         rl_punch_in.setOnClickListener(this);
         tv_punchtitle1.setOnClickListener(this);
