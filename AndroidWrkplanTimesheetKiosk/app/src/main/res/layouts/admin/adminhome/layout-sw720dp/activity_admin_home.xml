@@ -88,7 +88,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    android:text="Kiosk Unit Settings"
-                   android:textSize="25sp"
+                   android:textSize="20sp"
                    android:textColor="#ffffff"
                    android:gravity="center"
                    android:background="#4F4F4F"/>
@@ -114,7 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Employee Image Settings"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textColor="#ffffff"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
