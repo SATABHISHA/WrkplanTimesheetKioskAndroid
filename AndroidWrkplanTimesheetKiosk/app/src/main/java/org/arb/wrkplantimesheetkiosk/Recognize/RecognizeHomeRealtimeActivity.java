@@ -557,6 +557,7 @@ public class RecognizeHomeRealtimeActivity extends AppCompatActivity implements 
                                         if (jsonObject.getInt("PersonId") > 0) {
                                             EmployeeName = jsonObject.getString("EmployeeName");
                                             EmployeeCode = jsonObject.getString("EmployeeCode");
+                                            Log.d("EmployeeCode-=>",EmployeeCode);
                                             if(jsonObject.getString("Supervisor1").contentEquals("")){
                                                 Supervisor1 = "Unassigned";
                                             }else {

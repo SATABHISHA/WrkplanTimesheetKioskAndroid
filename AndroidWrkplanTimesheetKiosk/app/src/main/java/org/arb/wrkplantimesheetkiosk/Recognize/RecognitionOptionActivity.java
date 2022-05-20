@@ -98,7 +98,8 @@ public class RecognitionOptionActivity extends AppCompatActivity implements View
         tv_cancel = findViewById(R.id.tv_cancel);
 
         tv_empname.setText("Hello\n"+RecognizeHomeRealtimeActivity.EmployeeName);
-        tv_emp_id.setText(String.valueOf(RecognizeHomeRealtimeActivity.PersonId));
+//        tv_emp_id.setText(String.valueOf(RecognizeHomeRealtimeActivity.PersonId)); //---commented as said by manish da and told to set employeecode instead
+        tv_emp_id.setText(RecognizeHomeRealtimeActivity.EmployeeCode);
         tv_supervisor1.setText(RecognizeHomeRealtimeActivity.Supervisor1);
         tv_supervisor2.setText(RecognizeHomeRealtimeActivity.Supervisor2);
 
